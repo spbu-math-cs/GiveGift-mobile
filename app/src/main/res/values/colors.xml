@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="background">#f2eae2</color>
+    <color name="sidebar">#fbf8f4</color>
+    <color name="buttons">#ff6332</color>
+    
+    <color name="account_name">#FF000000</color>
+    <color name="logo_name">#fb6535</color>
 </resources>
