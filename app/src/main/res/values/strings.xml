@@ -8,8 +8,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Дари Дары</string>
-    <string name="menu_account">Account</string>
-    <string name="menu_friends">Friends</string>
+    <string name="menu_account">Аккаунт</string>
+    <string name="menu_friends">Друзья</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
