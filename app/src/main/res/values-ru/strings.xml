@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">ДариДары</string>
     <string name="gift_search">Искать</string>
-    <string name="gift_desc">Описание</string>
+    <string name="gift_desc">Попуг</string>
     <string name="gift_img">Подарок</string>
 
 </resources>
