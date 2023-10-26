@@ -1,6 +1,6 @@
 Структура проекта
 
-src -> main ->
+app -> src -> main ->
 - java/com/example/givegiftdesign
 -- GiftBlock.java <- лежит инфа об элементе, в котором хранится картина, описание и ссылка на подарок
 -- MainActivity.java <- главный класс, с которого стартует приложение
@@ -24,3 +24,4 @@ src -> main ->
 --- data_extraction_rules.xml
 
 - AndroidManfest.xml <- указание параметров сборки и в целом без него проект не запустится)
+
