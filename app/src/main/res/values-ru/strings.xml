@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ДариДары</string>
+    <string name="gift_search">Искать</string>
+    <string name="gift_desc">Попуг</string>
+    <string name="gift_img">Подарок</string>
+
+</resources>
