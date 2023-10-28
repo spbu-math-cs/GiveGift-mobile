@@ -1,9 +1,9 @@
-## Запуск проекта
+# Запуск проекта
 
 File -> New -> New project -> New project from VCS
 URL - https://github.com/spbu-math-cs/GiveGift-mobile
 
-## Структура проекта
+# Структура проекта
 
 app -> src -> main ->
 - java/com/example/givegiftdesign
