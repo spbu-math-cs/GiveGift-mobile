@@ -4,5 +4,12 @@
     <string name="gift_search">Искать</string>
     <string name="gift_desc">Попуг</string>
     <string name="gift_img">Подарок</string>
+    <string name="friends">Друзья</string>
+    <string name="logout">Выйти</string>
+    <string name="profile">Профиль</string>
+    <string name="preferences">Предпочтения</string>
+    <string name="hello_text">Привет</string>
+    <string name="hello_text_friends">У тебя нет друзей</string>
+
 
 </resources>

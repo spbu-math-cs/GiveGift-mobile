@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.Menu;
 
 import com.squareup.picasso.Picasso;
 
@@ -47,5 +49,26 @@ public class MainActivity extends AppCompatActivity {
         giftDescription.setText(gb.getDescription());
 
         // Логика кнопки может находиться в другом месте
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace()
+            case 2:
+            case 3:
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 }

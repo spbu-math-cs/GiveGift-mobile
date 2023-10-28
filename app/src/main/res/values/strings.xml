@@ -3,4 +3,11 @@
     <string name="gift_search">Search</string>
     <string name="gift_desc">Попуг</string>
     <string name="gift_img">Gift</string>
+    <string name="friends">Friends</string>
+    <string name="logout">Logout</string>
+    <string name="profile">Profile</string>
+    <string name="preferences">Preferences</string>
+
+    <string name="hello_text">Profile</string>
+    <string name="hello_text_friends">You have no friends</string>
 </resources>
