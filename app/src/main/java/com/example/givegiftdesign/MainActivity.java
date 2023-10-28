@@ -3,13 +3,18 @@ package com.example.givegiftdesign;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.Menu;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         giftSearch = findViewById(R.id.gift_search);
 
         displayGiftBlockInfo(giftBlock());
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PreferenceActivity.class)));
     }
 
     private void displayGiftBlockInfo(GiftBlock gb) {
@@ -53,12 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getOrder()) {
             case 1:
-//                getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace()
+                Log.d("Item profile", "clicked");
+                startActivity(new Intent(this, ProfileActivity.class));
+                return true;
             case 2:
+                Log.d("Item friends", "clicked");
+                startActivity(new Intent(this, FriendsActivity.class));
+                return true;
             case 3:
                 return true;
         }
