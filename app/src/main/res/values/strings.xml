@@ -10,4 +10,6 @@
 
     <string name="hello_text">Profile</string>
     <string name="hello_text_friends">You have no friends</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="edit_profile">Edit profile</string>
 </resources>

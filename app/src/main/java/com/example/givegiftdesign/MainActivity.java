@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private GiftBlock giftBlock() {
         return new GiftBlock(
                 "https://i.imgur.com/67tSocD.jpeg",
-                "Попуг",
+                "",
                 "https://imgur.com/gallery/67tSocD"
         );
     }
