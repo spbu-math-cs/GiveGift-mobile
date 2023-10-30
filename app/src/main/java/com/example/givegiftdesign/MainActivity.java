@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, FriendsActivity.class));
                 return true;
             case 3:
+                Log.d("Exit", "clicked");
+                startActivity(new Intent(this, RegistryActivity.class));
                 return true;
         }
 

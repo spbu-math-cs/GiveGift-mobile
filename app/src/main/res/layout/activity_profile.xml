@@ -97,7 +97,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:id="@+id/editing"
-                                        android:background="#1AFFFFFF"
+                                    android:background="#1AFFFFFF"
                                 />
 
                             </RelativeLayout>
