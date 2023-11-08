@@ -82,10 +82,11 @@
                 app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
-                android:id="@+id/gift_desc"
-                style="@style/Description"
-                android:layout_below="@+id/gift_image"
-                android:text="@string/gift_desc" />
+            android:id="@+id/gift_desc"
+            style="@style/Description"
+            android:layout_below="@+id/gift_image"
+            android:paddingLeft="100dp"
+            android:text="@string/gift_desc" />
 
         <Button
                 android:id="@+id/gift_search"
