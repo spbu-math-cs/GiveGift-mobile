@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private GiftBlock giftBlock() {
         return new GiftBlock(
                 "https://i.imgur.com/67tSocD.jpeg",
-                "Попуг",
+                "",
                 "https://imgur.com/gallery/67tSocD"
         );
     }
@@ -40,9 +40,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        giftImageView = findViewById(R.id.gift_image);
-        giftDescription = findViewById(R.id.gift_desc);
-        giftSearch = findViewById(R.id.gift_search);
+        giftImageView = findViewById(R.id.gift_image_one);
+        giftDescription = findViewById(R.id.gift_desc_one);
+        giftSearch = findViewById(R.id.gift_search_one);
+
+        displayGiftBlockInfo(giftBlock());
+
+        giftImageView = findViewById(R.id.gift_image_two);
+        giftDescription = findViewById(R.id.gift_desc_two);
+        giftSearch = findViewById(R.id.gift_search_two);
 
         displayGiftBlockInfo(giftBlock());
 
