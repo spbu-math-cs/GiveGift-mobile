@@ -13,4 +13,6 @@
     <string name="profile_name">Имя пользователя</string>
     <string name="edit_profile">Изменить профиль</string>
     <string name="megamarket">Мегамаркет</string>
+    <string name="price">Цена</string>
+    <string name="num_of_ideas">Количество идей</string>
 </resources>
