@@ -3,10 +3,16 @@ package com.example.givegiftdesign;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.SeekBar;
 
+import com.example.givegiftdesign.preference.NumOfIdeas;
+import com.example.givegiftdesign.preference.Price;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class PreferenceActivity extends AppCompatActivity {
@@ -16,14 +22,36 @@ public class PreferenceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference);
 
+        // Открывает список со списком возможных предпочтений
         FloatingActionButton fab = findViewById(R.id.fab_add);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onAddPref(view);
             }
         });
+
+        // Нижняя левя кнопка отменяет изменения
+        FloatingActionButton fab_decline = findViewById(R.id.fab_decline);
+        fab_decline.setOnClickListener(view -> finish());
+
+        // Нижняя правая кнопка с галочкой принимает изменения
+        FloatingActionButton fab_accept = findViewById(R.id.fab_accept);
+        fab_accept.setOnClickListener(view -> finish());
+
+        // Контактирует с полем Price
+        SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
+        EditText minPrice = findViewById(R.id.minPrice);
+        EditText maxPrice = findViewById(R.id.maxPrice);
+        Price priceHandler = new Price();
+        priceHandler.handle(seekBarPrice, minPrice, maxPrice);
+
+        // Контактирует с полем Number of ideas
+        SeekBar seekBarCount = findViewById(R.id.seekBarNumOfIdeas);
+        EditText countOf = findViewById(R.id.editTextNumOfIdeas);
+        NumOfIdeas numOfIdeas = new NumOfIdeas();
+        numOfIdeas.handle(seekBarCount, countOf);
+
     }
 
     private void onAddPref(View view) {
@@ -45,4 +73,6 @@ public class PreferenceActivity extends AppCompatActivity {
 
         popupMenu.show();
     }
+
+
 }
