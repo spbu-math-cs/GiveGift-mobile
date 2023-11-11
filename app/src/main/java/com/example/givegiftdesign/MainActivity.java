@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    // Люблю попугов
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
