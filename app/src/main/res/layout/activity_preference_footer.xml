@@ -18,9 +18,11 @@
         android:clickable="true"
         android:contentDescription="@string/gift_search"
         android:longClickable="false"
+        android:src="@drawable/baseline_cancel_24"
+        app:maxImageSize="24dp"
+        app:fabCustomSize="48dp"
         app:backgroundTint="@color/orange"
-        app:rippleColor="@color/white"
-        app:srcCompat="@drawable/baseline_cancel_24" />
+        app:rippleColor="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_accept"
@@ -31,7 +33,9 @@
         android:clickable="true"
         android:contentDescription="@string/gift_search"
         android:longClickable="false"
+        android:src="@drawable/baseline_done_24"
+        app:maxImageSize="24dp"
+        app:fabCustomSize="48dp"
         app:backgroundTint="@color/orange"
-        app:rippleColor="@color/white"
-        app:srcCompat="@drawable/baseline_done_24" />
+        app:rippleColor="@color/white" />
 </RelativeLayout>

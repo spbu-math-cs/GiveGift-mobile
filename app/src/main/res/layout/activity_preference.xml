@@ -39,9 +39,20 @@
                 android:id="@+id/pref2"
                 layout="@layout/activity_preference_block" />
 
-            <include
-                android:id="@+id/pref3"
-                layout="@layout/activity_preference_block" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="@string/gift_desc"
+                android:longClickable="false"
+                android:src="@drawable/baseline_add_24"
+                app:maxImageSize="24dp"
+                app:fabCustomSize="48dp"
+                app:backgroundTint="@color/orange"
+                app:rippleColor="@color/white"
+                 />
 
 
         </LinearLayout>
@@ -96,7 +107,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/num_of_ideas_layout">

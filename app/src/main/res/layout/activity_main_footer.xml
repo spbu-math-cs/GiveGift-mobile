@@ -18,7 +18,9 @@
         android:clickable="true"
         android:contentDescription="@string/gift_search"
         android:longClickable="false"
+        android:src="@drawable/ic_gift_name"
+        app:maxImageSize="24dp"
+        app:fabCustomSize="48dp"
         app:backgroundTint="@color/orange"
-        app:rippleColor="@color/white"
-        app:srcCompat="@drawable/ic_gift_name" />
+        app:rippleColor="@color/white" />
 </RelativeLayout>

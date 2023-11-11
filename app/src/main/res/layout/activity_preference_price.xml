@@ -33,8 +33,8 @@
             android:ems="6"
             android:inputType="numberDecimal"
             android:padding="5dp"
-            android:text="@string/from"
-            android:textColor="@color/light_gray" />
+            android:hint="@string/from"
+            android:textColor="@color/gray" />
 
     </androidx.cardview.widget.CardView>
 
@@ -55,8 +55,8 @@
             android:ems="6"
             android:inputType="numberDecimal"
             android:padding="5dp"
-            android:text="@string/to"
-            android:textColor="@color/light_gray" />
+            android:hint="@string/to"
+            android:textColor="@color/gray" />
 
     </androidx.cardview.widget.CardView>
 
