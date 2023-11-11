@@ -4,6 +4,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="15dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
@@ -17,7 +18,8 @@
         android:clickable="true"
         android:contentDescription="@string/gift_search"
         android:longClickable="false"
-        app:rippleColor="@color/orange"
+        app:backgroundTint="@color/orange"
+        app:rippleColor="@color/white"
         app:srcCompat="@drawable/baseline_cancel_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,6 +31,7 @@
         android:clickable="true"
         android:contentDescription="@string/gift_search"
         android:longClickable="false"
-        app:rippleColor="@color/orange"
+        app:backgroundTint="@color/orange"
+        app:rippleColor="@color/white"
         app:srcCompat="@drawable/baseline_done_24" />
 </RelativeLayout>
