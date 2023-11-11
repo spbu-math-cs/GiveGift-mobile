@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="25dp">
@@ -10,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:progressBackgroundTint="@color/gray"
-        android:progressTint="@color/gray"
+        android:progressTint="@color/orange"
         android:thumbTint="@color/orange"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -31,10 +32,11 @@
             android:autofillHints="min_val"
             android:background="@android:color/transparent"
             android:ems="6"
+            android:hint="@string/from"
             android:inputType="numberDecimal"
             android:padding="5dp"
-            android:hint="@string/from"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.cardview.widget.CardView>
 
@@ -53,10 +55,11 @@
             android:autofillHints="max_val"
             android:background="@android:color/transparent"
             android:ems="6"
+            android:hint="@string/to"
             android:inputType="numberDecimal"
             android:padding="5dp"
-            android:hint="@string/to"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.cardview.widget.CardView>
 

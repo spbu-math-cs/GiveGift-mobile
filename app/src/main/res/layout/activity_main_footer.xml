@@ -19,6 +19,7 @@
         android:contentDescription="@string/gift_search"
         android:longClickable="false"
         android:src="@drawable/ic_gift_name"
+        app:elevation="0dp"
         app:maxImageSize="24dp"
         app:fabCustomSize="48dp"
         app:backgroundTint="@color/orange"
