@@ -1,12 +1,16 @@
 package com.example.givegiftdesign;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
@@ -31,13 +35,18 @@ public class PreferenceActivity extends AppCompatActivity {
             }
         });
 
-        // Нижняя левя кнопка отменяет изменения
-        FloatingActionButton fab_decline = findViewById(R.id.fab_decline);
-        fab_decline.setOnClickListener(view -> finish());
+        ConstraintLayout block = findViewById(R.id.block);
+        Button deleteBtn = findViewById(R.id.btn);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup parent = (ViewGroup) block.getParent();
+                parent.removeView(block);
+            }
+        });
 
-        // Нижняя правая кнопка с галочкой принимает изменения
-        FloatingActionButton fab_accept = findViewById(R.id.fab_accept);
-        fab_accept.setOnClickListener(view -> finish());
+
+
 
         // Контактирует с полем Price
         SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
@@ -52,6 +61,13 @@ public class PreferenceActivity extends AppCompatActivity {
         NumOfIdeas numOfIdeas = new NumOfIdeas();
         numOfIdeas.handle(seekBarCount, countOf);
 
+        // Нижняя левя кнопка отменяет изменения
+        FloatingActionButton fab_decline = findViewById(R.id.fab_decline);
+        fab_decline.setOnClickListener(view -> finish());
+
+        // Нижняя правая кнопка с галочкой принимает изменения
+        FloatingActionButton fab_accept = findViewById(R.id.fab_accept);
+        fab_accept.setOnClickListener(view -> finish());
     }
 
     private void onAddPref(View view) {

@@ -10,6 +10,7 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/orange">
@@ -35,7 +36,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/orange"
-            android:onClick="onDelete"
             android:text="@string/delete"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
