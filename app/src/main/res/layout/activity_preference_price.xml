@@ -3,35 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="25dp">
 
     <SeekBar
         android:id="@+id/seekBarPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:thumbTint="@color/orange"
+        android:progressTint="@color/gray"
+        android:progressBackgroundTint="@color/gray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/minPrice"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="5"
-        android:inputType="text"
-        android:text="1"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBarPrice">
+
+        <EditText
+            android:id="@+id/minPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="min_val"
+            android:ems="6"
+            android:inputType="numberDecimal"
+            android:text="@string/from"
+            android:background="@android:color/transparent"
+            android:textColor="@color/light_gray"
+            android:padding="5dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarPrice">
 
     <EditText
         android:id="@+id/maxPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="5"
-        android:inputType="text"
-        android:text="2000"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
+        android:autofillHints="max_val"
+        android:ems="6"
+        android:inputType="numberDecimal"
+        android:text="@string/to"
+        android:background="@android:color/transparent"
+        android:textColor="@color/light_gray"
+        android:padding="5dp"/>
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

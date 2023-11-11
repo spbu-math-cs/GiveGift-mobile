@@ -16,4 +16,8 @@
     <string name="price">Price</string>
     <string name="num_of_ideas">Number of ideas</string>
     <string name="delete" translatable="false">X</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="count_of">Max</string>
+    <string name="count_val">Count</string>
 </resources>

@@ -15,4 +15,8 @@
     <string name="megamarket">Мегамаркет</string>
     <string name="price">Цена</string>
     <string name="num_of_ideas">Количество идей</string>
+    <string name="from">от</string>
+    <string name="to">до</string>
+    <string name="count_of">Максимум</string>
+    <string name="count_val">Количество</string>
 </resources>

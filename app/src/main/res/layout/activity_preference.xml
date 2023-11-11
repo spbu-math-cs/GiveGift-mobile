@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/preferences"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="23sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/price"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="23sp"/>
 
         <include
             android:id="@+id/price"
@@ -83,7 +85,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/num_of_ideas"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="23sp"/>
 
         <include
             android:id="@+id/ideas"
