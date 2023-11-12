@@ -71,7 +71,7 @@ public class PreferenceBlock extends AppCompatActivity {
                 );
         final int cardCornerRadius = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_PX,
-                resources.getDimension(R.dimen.pref_cardview_cornerradius),
+                resources.getDimension(R.dimen.cardview_cornerradius),
                 resources.getDisplayMetrics()
         );
         ViewGroup.MarginLayoutParams cardViewParams = new ViewGroup.MarginLayoutParams(
