@@ -29,16 +29,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class PreferenceActivity extends AppCompatActivity {
-
-//    private ConstraintLayout preferencesContainerLayout;
     private FlexboxLayout preferencesContainerLayout;
+    private ArrayList<String> containedPref = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference);
 
-//        preferencesContainerLayout = findViewById(R.id.pref_container);
         preferencesContainerLayout = findViewById(R.id.flexbox);
 
         // Открывает список со списком возможных предпочтений
@@ -80,29 +78,34 @@ public class PreferenceActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 String selectedItem = item.getTitle().toString();
 
-                // Самый внешний элемент, который может задать border radius
-                CardView cardViewBlock = new CardView(PreferenceActivity.this);
-                // В этом слое можно правильно расположить элементы
-                ConstraintLayout innerBlock = new ConstraintLayout(PreferenceActivity.this);
-                // Название предпочтения
-                TextView pref = new TextView(PreferenceActivity.this);
-                // Кнопка для удаления предпочтения из внешнего layout
-                Button closeBtn = new Button(PreferenceActivity.this);
+                if (containedPref.contains(selectedItem)) {
+                    return false;
+                } else {
+                    containedPref.add(selectedItem);
+                    // Самый внешний элемент, который может задать border radius
+                    CardView cardViewBlock = new CardView(PreferenceActivity.this);
+                    // В этом слое можно правильно расположить элементы
+                    ConstraintLayout innerBlock = new ConstraintLayout(PreferenceActivity.this);
+                    // Название предпочтения
+                    TextView pref = new TextView(PreferenceActivity.this);
+                    // Кнопка для удаления предпочтения из внешнего layout
+                    Button closeBtn = new Button(PreferenceActivity.this);
 
-                PreferenceBlock prefBlock = new PreferenceBlock(
-                        cardViewBlock,
-                        innerBlock,
-                        pref,
-                        closeBtn,
-                        getResources()
-                );
+                    PreferenceBlock prefBlock = new PreferenceBlock(
+                            cardViewBlock,
+                            innerBlock,
+                            pref,
+                            closeBtn,
+                            getResources(),
+                            containedPref
+                    );
 
-                // Добавляем сделанный CardView в основной layout
-                View prefView = prefBlock.prefViewParam(selectedItem);
-                preferencesContainerLayout.addView(prefView);
-                //preferencesContainerLayout.addView(prefView);
+                    // Добавляем сделанный CardView в основной layout
+                    View prefView = prefBlock.prefViewParam(selectedItem);
+                    preferencesContainerLayout.addView(prefView);
 
-                return true;
+                    return true;
+                }
             }
         });
 

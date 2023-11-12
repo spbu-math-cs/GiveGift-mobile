@@ -34,3 +34,6 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--<include-->
+<!--android:id="@+id/price"-->
+<!--layout="@layout/activity_preference_block" />-->

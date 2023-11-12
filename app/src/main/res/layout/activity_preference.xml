@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/pref_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/layout_pref_height"
         android:layout_weight="2"
         android:orientation="vertical"
         android:layout_margin="15dp">
@@ -25,9 +25,15 @@
             android:textColor="@color/black"
             android:textSize="23sp"/>
 
-        <include
-            android:id="@+id/pref_container"
-            layout="@layout/activity_preference_preferences" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/pref_container"
+                layout="@layout/activity_preference_preferences" />
+
+        </ScrollView>
 
     </LinearLayout>
 
@@ -80,7 +86,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="72dp"
         android:layout_weight="1"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/num_of_ideas_layout">
@@ -91,11 +97,3 @@
     </RelativeLayout>
 
 </LinearLayout>
-
-<!--<include-->
-<!--android:id="@+id/pref1"-->
-<!--layout="@layout/activity_preference_block" />-->
-
-<!--<include-->
-<!--android:id="@+id/pref2"-->
-<!--layout="@layout/activity_preference_block" />-->

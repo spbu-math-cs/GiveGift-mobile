@@ -2,7 +2,6 @@ package com.example.givegiftdesign.preference;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,15 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.givegiftdesign.R;
 
+import java.util.ArrayList;
+
 public class PreferenceBlock extends AppCompatActivity {
-    public PreferenceBlock(CardView cardViewBlock, ConstraintLayout innerBlock, TextView pref, Button closeBtn, Resources resources) {
+    public PreferenceBlock(CardView cardViewBlock,
+                           ConstraintLayout innerBlock,
+                           TextView pref,
+                           Button closeBtn,
+                           Resources resources,
+                           ArrayList<String> prefs) {
         this.cardViewBlock = cardViewBlock;
         this.innerBlock = innerBlock;
         this.pref = pref;
@@ -26,7 +32,7 @@ public class PreferenceBlock extends AppCompatActivity {
         this.resources = resources;
 
         setPrefBlock();
-        setDeleteBtn();
+        setDeleteBtn(prefs);
     }
 
     CardView cardViewBlock;
@@ -45,12 +51,13 @@ public class PreferenceBlock extends AppCompatActivity {
         return cardViewBlock.getId();
     }
 
-    private void setDeleteBtn() {
+    private void setDeleteBtn(ArrayList<String> prefs) {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ViewGroup parent = (ViewGroup) cardViewBlock.getParent();
                 parent.removeView(cardViewBlock);
+                prefs.remove(String.valueOf(pref.getText()));
             }
         });
     }
