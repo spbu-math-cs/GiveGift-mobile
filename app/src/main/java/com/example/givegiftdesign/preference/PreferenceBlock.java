@@ -2,6 +2,7 @@ package com.example.givegiftdesign.preference;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +18,22 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import com.example.givegiftdesign.R;
 
 public class PreferenceBlock extends AppCompatActivity {
-    public PreferenceBlock(CardView cardViewBlock, ConstraintLayout innerBlock, TextView pref, Button closeBtn) {
+    public PreferenceBlock(CardView cardViewBlock, ConstraintLayout innerBlock, TextView pref, Button closeBtn, Resources resources) {
         this.cardViewBlock = cardViewBlock;
         this.innerBlock = innerBlock;
         this.pref = pref;
         this.closeBtn = closeBtn;
+        this.resources = resources;
 
         setPrefBlock();
+        setDeleteBtn();
     }
 
     CardView cardViewBlock;
     ConstraintLayout innerBlock;
     TextView pref;
     Button closeBtn;
+    Resources resources;
 
     public View prefViewParam(String selectedItem) {
         pref.setText(selectedItem);
@@ -37,17 +41,29 @@ public class PreferenceBlock extends AppCompatActivity {
         return cardViewBlock;
     }
 
-    private void setPrefBlock() {
-        Resources resources = getResources();
+    public int getId() {
+        return cardViewBlock.getId();
+    }
 
+    private void setDeleteBtn() {
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup parent = (ViewGroup) cardViewBlock.getParent();
+                parent.removeView(cardViewBlock);
+            }
+        });
+    }
+
+    private void setPrefBlock() {
         // Самый внешний элемент, который может задать border radius
         final int cardMargin = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
+                TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.pref_cardview_margin),
                 resources.getDisplayMetrics()
                 );
         final int cardCornerRadius = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
+                TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.pref_cardview_cornerradius),
                 resources.getDisplayMetrics()
         );
@@ -55,6 +71,7 @@ public class PreferenceBlock extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
+        cardViewBlock.setId(View.generateViewId());
         cardViewParams.setMargins(cardMargin, cardMargin, cardMargin, cardMargin);
         cardViewBlock.setLayoutParams(cardViewParams);
         cardViewBlock.setRadius(cardCornerRadius);
@@ -65,17 +82,17 @@ public class PreferenceBlock extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
-        innerBlock.setBackgroundColor(Color.parseColor(String.valueOf(R.color.orange)));
+        innerBlock.setBackgroundColor(resources.getColor(R.color.orange));
         //
 
         // Название предпочтения
         final int textPaddingStart = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
+                TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.pref_textview_paddingstart),
                 resources.getDisplayMetrics()
         );
         final int textSize = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
+                TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.pref_textview_textsize),
                 resources.getDisplayMetrics()
         );
@@ -88,7 +105,7 @@ public class PreferenceBlock extends AppCompatActivity {
 
         // Кнопка для удаления предпочтения из внешнего layout
         final int btnSize = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
+                TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.pref_button_width),
                 resources.getDisplayMetrics()
         );

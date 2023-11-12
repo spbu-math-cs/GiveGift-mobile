@@ -2,6 +2,7 @@ package com.example.givegiftdesign;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.helper.widget.Flow;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
@@ -22,18 +23,23 @@ import android.widget.TextView;
 import com.example.givegiftdesign.preference.NumOfIdeas;
 import com.example.givegiftdesign.preference.PreferenceBlock;
 import com.example.givegiftdesign.preference.Price;
+import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class PreferenceActivity extends AppCompatActivity {
 
-    private LinearLayout preferencesContainerLayout;
+//    private ConstraintLayout preferencesContainerLayout;
+    private FlexboxLayout preferencesContainerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference);
 
-        preferencesContainerLayout = findViewById(R.id.pref_container);
+//        preferencesContainerLayout = findViewById(R.id.pref_container);
+        preferencesContainerLayout = findViewById(R.id.flexbox);
 
         // Открывает список со списком возможных предпочтений
         FloatingActionButton fab = findViewById(R.id.fab_add);
@@ -43,18 +49,6 @@ public class PreferenceActivity extends AppCompatActivity {
                 onAddPref(view);
             }
         });
-
-        CardView block = findViewById(R.id.pref1);
-        Button deleteBtn = findViewById(R.id.btn);
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ViewGroup parent = (ViewGroup) block.getParent();
-                parent.removeView(block);
-            }
-        });
-
-
 
         // Контактирует с полем Price
         SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
@@ -99,11 +93,14 @@ public class PreferenceActivity extends AppCompatActivity {
                         cardViewBlock,
                         innerBlock,
                         pref,
-                        closeBtn
+                        closeBtn,
+                        getResources()
                 );
 
                 // Добавляем сделанный CardView в основной layout
-                preferencesContainerLayout.addView(prefBlock.prefViewParam(selectedItem));
+                View prefView = prefBlock.prefViewParam(selectedItem);
+                preferencesContainerLayout.addView(prefView);
+                //preferencesContainerLayout.addView(prefView);
 
                 return true;
             }
@@ -111,6 +108,4 @@ public class PreferenceActivity extends AppCompatActivity {
 
         popupMenu.show();
     }
-
-
 }
