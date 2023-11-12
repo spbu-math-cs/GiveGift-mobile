@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pref_cardview_margin">5dp</dimen>
+    <dimen name="pref_cardview_cornerradius">15dp</dimen>
+    <dimen name="pref_textview_paddingstart">12dp</dimen>
+    <dimen name="pref_textview_margin">5dp</dimen>
+    <dimen name="pref_textview_textsize">15sp</dimen>
+    <dimen name="pref_button_width">40dp</dimen>
+    <dimen name="pref_button_height">40dp</dimen>
+</resources>
