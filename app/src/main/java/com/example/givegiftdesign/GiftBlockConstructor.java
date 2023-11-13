@@ -70,7 +70,7 @@ public class GiftBlockConstructor {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        cardParams.setMargins(0, cardMargin, 0, 0);
+        cardParams.setMargins(0, cardMargin, 0, cardMargin);
         cardView.setLayoutParams(cardParams);
         cardView.setRadius(cardCornerRadius);
         //
@@ -149,7 +149,7 @@ public class GiftBlockConstructor {
         );
         textView.setLayoutParams(textParams);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        textView.setText(String.valueOf(R.string.gift_desc));
+        textView.setText(resources.getText(R.string.gift_desc));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         //
 
@@ -188,7 +188,7 @@ public class GiftBlockConstructor {
         button.setBackground(resources.getDrawable(R.drawable.orange_button_background));
         button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.basket, 0, 0, 0);
         button.setPadding(buttonPadding, 0, 0, 0);
-        button.setText(String.valueOf(R.string.megamarket));
+        button.setText(resources.getText(R.string.megamarket));
         button.setAllCaps(false);
         button.setTextColor(Color.WHITE);
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
