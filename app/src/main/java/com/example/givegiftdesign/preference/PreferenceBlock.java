@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.content.res.Resources;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -18,7 +17,7 @@ import com.example.givegiftdesign.R;
 
 import java.util.ArrayList;
 
-public class PreferenceBlock extends AppCompatActivity {
+public class PreferenceBlock {
     public PreferenceBlock(CardView cardViewBlock,
                            ConstraintLayout innerBlock,
                            TextView pref,

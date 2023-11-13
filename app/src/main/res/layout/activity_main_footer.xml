@@ -23,7 +23,7 @@
         app:backgroundTint="@color/orange"
         app:elevation="0dp"
         app:fabCustomSize="48dp"
-        app:maxImageSize="24dp"
+        app:maxImageSize="36dp"
         app:rippleColor="@color/white"
         tools:ignore="ImageContrastCheck" />
 
@@ -37,14 +37,16 @@
         app:cardCornerRadius="@dimen/cardview_cornerradius">
 
         <Button
-            android:id="@+id/giftIdea"
+            android:id="@+id/gift_idea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/orange"
+            android:clickable="true"
+            android:onClick="onGiftIdeaCreate"
             android:padding="10dp"
             android:text="@string/gift_search"
             android:textColor="@color/white"
-            android:clickable="true"
+            android:textStyle="bold"
             tools:ignore="TextContrastCheck" />
 
     </androidx.cardview.widget.CardView>
