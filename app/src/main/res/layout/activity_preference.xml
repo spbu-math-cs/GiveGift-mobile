@@ -61,35 +61,12 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/num_of_ideas_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/price_layout">
-
-        <TextView
-            android:id="@+id/editTextText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/num_of_ideas"
-            android:textColor="@color/black"
-            android:textSize="23sp" />
-
-        <include
-            android:id="@+id/ideas"
-            layout="@layout/activity_preference_num_of_ideas" />
-
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/num_of_ideas_layout">
+        app:layout_constraintTop_toBottomOf="@id/price_layout">
 
         <include
             android:id="@+id/main_footer"

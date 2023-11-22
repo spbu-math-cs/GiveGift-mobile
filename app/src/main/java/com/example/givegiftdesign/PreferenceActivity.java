@@ -13,7 +13,6 @@ import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.givegiftdesign.preference.NumOfIdeas;
 import com.example.givegiftdesign.preference.PreferenceBlock;
 import com.example.givegiftdesign.preference.Price;
 import com.google.android.flexbox.FlexboxLayout;
@@ -47,12 +46,6 @@ public class PreferenceActivity extends AppCompatActivity {
         EditText maxPrice = findViewById(R.id.maxPrice);
         Price priceHandler = new Price();
         priceHandler.handle(seekBarPrice, minPrice, maxPrice);
-
-        // Контактирует с полем Number of ideas
-        SeekBar seekBarCount = findViewById(R.id.seekBarNumOfIdeas);
-        EditText countOf = findViewById(R.id.editTextNumOfIdeas);
-        NumOfIdeas numOfIdeas = new NumOfIdeas();
-        numOfIdeas.handle(seekBarCount, countOf);
 
         // Нижняя левя кнопка отменяет изменения
         FloatingActionButton fab_decline = findViewById(R.id.fab_decline);
