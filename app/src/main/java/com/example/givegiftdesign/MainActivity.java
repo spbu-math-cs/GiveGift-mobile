@@ -21,6 +21,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView giftImageView;
     private TextView giftDescription;
@@ -35,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+
+
     LinearLayoutCompat mainLayout;
 
     // Люблю попугов
@@ -42,6 +52,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Работающий запрос на сторонний сервер
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://rawgit.com/startandroid/data/master/messages/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PreferenceApi prefApi = retrofit.create(PreferenceApi.class);
+
+        Call<List<Preference>> prefs = prefApi.prefs();
+
+        prefs.enqueue(new Callback<List<Preference>>() {
+            @Override
+            public void onResponse(Call<List<Preference>> call, Response<List<Preference>> response) {
+                if (response.isSuccessful())
+                    Log.d("Callback", "response: " + response.body().size());
+                else
+                    Log.d("Response code", "response code " + response.code());
+            }
+
+            @Override
+            public void onFailure(Call<List<Preference>> call, Throwable t) {
+                Log.w("Failure", "failure: " + t);
+            }
+        });
+        //
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
