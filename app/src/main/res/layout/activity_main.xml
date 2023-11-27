@@ -21,16 +21,36 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
-        android:contentDescription="@string/gift_desc">
+        android:layout_gravity="center"
+        android:contentDescription="@string/gift_desc" >
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/gift_layout"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:transcriptMode="alwaysScroll"
+            android:stackFromBottom="true">
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/gift_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:transcriptMode="alwaysScroll"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center" >
+
+                </LinearLayout>
+            <!-- android:layout_gravity="center">-->
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
 
     </ScrollView>
 
