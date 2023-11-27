@@ -3,7 +3,6 @@ package com.example.givegiftdesign;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import android.view.Menu;
 
 import com.example.givegiftdesign.request.Request;
@@ -70,15 +67,6 @@ public class MainActivity extends AppCompatActivity {
         giftIdeaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                GiftBlockConstructor giftBlockConstructor = new GiftBlockConstructor(
-//                        new CardView(MainActivity.this),
-//                        new LinearLayout(MainActivity.this),
-//                        new LinearLayout(MainActivity.this),
-//                        new ImageView(MainActivity.this),
-//                        new TextView(MainActivity.this),
-//                        new Button(MainActivity.this),
-//                        getResources()
-//                );
 
                 NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
                         getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false)
@@ -90,36 +78,9 @@ public class MainActivity extends AppCompatActivity {
         });
         //
 
-//        giftImageView = findViewById(R.id.gift_image_one);
-//        giftDescription = findViewById(R.id.gift_desc_one);
-//        giftSearch = findViewById(R.id.gift_search_one);
-//
-//        displayGiftBlockInfo(giftBlock());
-//
-//        giftImageView = findViewById(R.id.gift_image_two);
-//        giftDescription = findViewById(R.id.gift_desc_two);
-//        giftSearch = findViewById(R.id.gift_search_two);
-//
-//        displayGiftBlockInfo(giftBlock());
-
         // Кнопка для перехода в activity, где происходит выбор предпочтений и цены
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PreferenceActivity.class)));
-    }
-
-    /**
-     * Скорее всего уже не нужно
-     * Данный код был перенесен в GiftBlockConstructor
-     * @param gb - ignored
-     */
-    @Deprecated
-    private void displayGiftBlockInfo(GiftBlock gb) {
-        // Временный код
-        // Показывает как получить картинку из инета и заменить её в activity_main
-//        Picasso.get().load(gb.getImageUrl()).into(giftImageView);
-//        giftDescription.setText(gb.getDescription());
-
-        // Логика кнопки может находиться в другом месте
     }
 
     /**
