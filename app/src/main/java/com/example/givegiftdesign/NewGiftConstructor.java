@@ -1,0 +1,57 @@
+package com.example.givegiftdesign;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+public class NewGiftConstructor {
+
+    View includedGiftBlock;
+    ImageView imageView;
+    TextView textView;
+    Button button;
+
+    /**
+     * Помимо присвоения переменных в конструкторе вызывается шаблон блока
+     * @param view - шаблон блока
+     */
+    public NewGiftConstructor(View view) {
+        includedGiftBlock = view;
+
+        imageView = includedGiftBlock.findViewById(R.id.gift_image);
+        textView = includedGiftBlock.findViewById(R.id.gift_desc_two);
+        button = includedGiftBlock.findViewById(R.id.gift_search_two);
+    }
+
+    /**
+     * Берет картинку из сети и присваивает imageView
+     * @param gb - куда присвоить картинку
+     * @return - CardView с присвоенной картинкой
+     */
+    public View giftViewParams(GiftBlock gb) {
+        Picasso.get().load(gb.getImageUrl()).into(imageView);
+        textView.setText(gb.getDescription());
+        setUrlBtn(gb.getGiftUrl());
+
+        return includedGiftBlock;
+    }
+
+    /**
+     * По нажатии на кнопку переходит по ссылке
+     * @param url - ссылка
+     */
+    private void setUrlBtn(String url) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+
+            }
+        });
+    }
+}

@@ -29,9 +29,11 @@ public class GiftBlockConstructor {
      * @param button - кнопка 'перейти по ссылке'
      * @param resources - размерности
      */
-    public GiftBlockConstructor(CardView cardView, LinearLayout linearLayout, ImageView imageView,
+    public GiftBlockConstructor(CardView cardView, LinearLayout innerLinearLayout,
+                                LinearLayout linearLayout, ImageView imageView,
                                 TextView textView, Button button, Resources resources) {
         this.cardView = cardView;
+        this.innerLinearLayout = innerLinearLayout;
         this.linearLayout = linearLayout;
         this.imageView = imageView;
         this.textView = textView;
@@ -43,6 +45,7 @@ public class GiftBlockConstructor {
 
     CardView cardView;
     LinearLayout linearLayout;
+    LinearLayout innerLinearLayout;
     ImageView imageView;
     TextView textView;
     Button button;
@@ -76,7 +79,7 @@ public class GiftBlockConstructor {
     }
 
     /**
-     * Устанавливаются CardView -> LinearLayout -> ImageView -> TextView -> Button ->
+     * Устанавливаются CardView -> LinearLayout -> innerLinearLayout -> ImageView -> TextView -> Button ->
      * добавляем в LinearLayout -> LinearLayout добавляем в CardView
      */
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -84,7 +87,12 @@ public class GiftBlockConstructor {
         // Задание CardView для скругленных углов
         final int cardMargin = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_PX,
-                resources.getDimension(R.dimen.main_cardview_margin_top),
+                resources.getDimension(R.dimen.main_cardview_margin),
+                resources.getDisplayMetrics()
+        );
+        final int cardPaddingBottom = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_PX,
+                resources.getDimension(R.dimen.main_cardview_padding_bottom),
                 resources.getDisplayMetrics()
         );
         final int cardCornerRadius = (int) TypedValue.applyDimension(
@@ -96,19 +104,54 @@ public class GiftBlockConstructor {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        cardParams.setMargins(0, cardMargin, 0, cardMargin);
+        cardParams.gravity = Gravity.CENTER;
+        cardParams.setMargins(cardMargin, cardMargin, cardMargin, cardMargin);
         cardView.setLayoutParams(cardParams);
+        cardView.setPadding(0, 0, 0, cardPaddingBottom);
         cardView.setRadius(cardCornerRadius);
         //
 
-        // Внутренний слой дя позиционирования элементов
+        // внешний слой для позиционирования элементов
+        final int linearLayoutPaddingBottom = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_PX,
+                resources.getDimension(R.dimen.linearlayout_padding_bottom),
+                resources.getDisplayMetrics()
+        );
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
         ));
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setBackgroundColor(resources.getColor(R.color.white));
-        linearLayout.setGravity(Gravity.CENTER);
+//        linearLayout.setTranscriptMode(LinearLayout.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        linearLayout.setPadding(
+                0,
+                0,
+                0,
+                linearLayoutPaddingBottom
+        );
+        linearLayout.setGravity(Gravity.BOTTOM);
+//        linearLayout.setStackFromBottom(true);
+
+        //
+
+        // внутренний слой для позиционирования элементов
+        final int innerLinearLayoutPadding = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_PX,
+                resources.getDimension(R.dimen.inner_linearlayout_padding),
+                resources.getDisplayMetrics()
+        );
+        innerLinearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        ));
+        innerLinearLayout.setBackgroundColor(resources.getColor(R.color.white));
+        innerLinearLayout.setPadding(
+                0,
+                0,
+                0,
+                innerLinearLayoutPadding
+        );
+        innerLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        innerLinearLayout.setGravity(Gravity.CENTER);
         //
 
         // Картинка из инета
@@ -169,6 +212,7 @@ public class GiftBlockConstructor {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
+        textView.setGravity(Gravity.CENTER);
         textParams.setMargins(
                 textMarginStart,
                 textMarginTop,
@@ -176,7 +220,7 @@ public class GiftBlockConstructor {
                 0
         );
         textView.setLayoutParams(textParams);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+//        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textView.setText(resources.getText(R.string.gift_desc));
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         //
@@ -207,6 +251,7 @@ public class GiftBlockConstructor {
                 buttonWidth,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
+
         buttonParams.setMargins(
                 0,
                 buttonMarginTop,
@@ -228,6 +273,8 @@ public class GiftBlockConstructor {
         linearLayout.addView(textView);
         linearLayout.addView(button);
 
-        cardView.addView(linearLayout);
+        innerLinearLayout.addView(linearLayout);
+
+        cardView.addView(innerLinearLayout);
     }
 }

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private GiftBlock giftBlock() {
         return new GiftBlock(
                 "https://i.imgur.com/67tSocD.jpeg",
-                "",
+                "Попуг",
                 "https://imgur.com/gallery/67tSocD"
         );
     }
@@ -70,16 +70,21 @@ public class MainActivity extends AppCompatActivity {
         giftIdeaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GiftBlockConstructor giftBlockConstructor = new GiftBlockConstructor(
-                        new CardView(MainActivity.this),
-                        new LinearLayout(MainActivity.this),
-                        new ImageView(MainActivity.this),
-                        new TextView(MainActivity.this),
-                        new Button(MainActivity.this),
-                        getResources()
+//                GiftBlockConstructor giftBlockConstructor = new GiftBlockConstructor(
+//                        new CardView(MainActivity.this),
+//                        new LinearLayout(MainActivity.this),
+//                        new LinearLayout(MainActivity.this),
+//                        new ImageView(MainActivity.this),
+//                        new TextView(MainActivity.this),
+//                        new Button(MainActivity.this),
+//                        getResources()
+//                );
+
+                NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
+                        getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false)
                 );
 
-                View giftIdeaView = giftBlockConstructor.giftViewParams(giftBlock());
+                View giftIdeaView = newGiftConstructor.giftViewParams(giftBlock());
                 mainLayout.addView(giftIdeaView);
             }
         });

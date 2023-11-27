@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="main_cardview_margin_top">20dp</dimen>
+    <dimen name="main_cardview_padding_bottom">20dp</dimen>
+    <dimen name="main_cardview_margin">10dp</dimen>
+    <dimen name="linearlayout_padding_bottom">20dp</dimen>
+    <dimen name="inner_linearlayout_padding">20dp</dimen>
     <dimen name="main_img_size">200dp</dimen>
     <dimen name="main_img_margin_start">30dp</dimen>
-    <dimen name="main_img_margin_top">10dp</dimen>
+    <dimen name="main_img_margin_top">30dp</dimen>
     <dimen name="main_img_margin_end">30dp</dimen>
     <dimen name="main_text_margin_start">30dp</dimen>
     <dimen name="main_text_margin_top">10dp</dimen>

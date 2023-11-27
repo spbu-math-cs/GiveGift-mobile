@@ -40,17 +40,6 @@
 <!--            android:divider="@drawable/empty_tall_divider"-->
 <!--            android:dividerPadding="20dp"-->
 
-            <include
-                android:id="@+id/gift_block"
-                layout="@layout/activity_main_gift"/>
-
-            <include
-                android:id="@+id/gift_block"
-                layout="@layout/activity_main_gift"/>
-
-            <include
-                android:id="@+id/gift_block"
-                layout="@layout/activity_main_gift"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
