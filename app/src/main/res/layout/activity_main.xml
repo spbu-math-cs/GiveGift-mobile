@@ -21,21 +21,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
-        android:paddingVertical="20dp"
+        android:paddingVertical="15dp"
         android:clipToPadding="false"
         android:orientation="vertical"
         android:contentDescription="@string/gift_desc" >
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/gift_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:transcriptMode="alwaysScroll"
-                android:stackFromBottom="true"
-                android:clipToPadding="false"
-                android:orientation="vertical"
-                android:paddingBottom="0dp" >
-
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/gift_layout"
+            android:showDividers=""
+            android:divider="@drawable/empty_tall_divider"
+            android:dividerPadding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transcriptMode="alwaysScroll"
+            android:stackFromBottom="true"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="10dp" >
             <!-- android:layout_gravity="center">-->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
