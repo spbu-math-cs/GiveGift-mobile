@@ -34,7 +34,7 @@ public class Price {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                minPrice.setSelection(minPrice.getText().length());
             }
 
             @Override
@@ -55,6 +55,7 @@ public class Price {
                 if (!s.toString().isEmpty()) {
                     int progress = Integer.parseInt(s.toString());
                     seekBarPrice.setProgress(progress);
+                    maxPrice.setSelection(maxPrice.getText().length());
                 }
             }
 

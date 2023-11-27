@@ -29,8 +29,6 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/gift_layout"
             android:showDividers=""
-            android:divider="@drawable/empty_tall_divider"
-            android:dividerPadding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transcriptMode="alwaysScroll"
@@ -39,6 +37,20 @@
             android:orientation="vertical"
             android:paddingBottom="10dp" >
             <!-- android:layout_gravity="center">-->
+<!--            android:divider="@drawable/empty_tall_divider"-->
+<!--            android:dividerPadding="20dp"-->
+
+            <include
+                android:id="@+id/gift_block"
+                layout="@layout/activity_main_gift"/>
+
+            <include
+                android:id="@+id/gift_block"
+                layout="@layout/activity_main_gift"/>
+
+            <include
+                android:id="@+id/gift_block"
+                layout="@layout/activity_main_gift"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
