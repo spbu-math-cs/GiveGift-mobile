@@ -1,4 +1,4 @@
-package com.example.givegiftdesign;
+package com.example.givegiftdesign.request;
 
 public class Preference {
     private long id;

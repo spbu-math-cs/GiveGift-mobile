@@ -1,7 +1,8 @@
-package com.example.givegiftdesign;
+package com.example.givegiftdesign.request;
 
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
@@ -10,14 +11,11 @@ import retrofit2.http.POST;
  * getFrieds потом поменяет тип. Нужно получать данные в соответствующий объект
  */
 public interface ServerApi {
-    @GET("getPreferences")
-    List<String> getPrefs();
+    @GET("account")
+    Call<Account> getAccount();
 
     @GET("getFriends")
     List<String> getFriends();
-
-    @POST("setPreferences")
-    void setPrefs();
 
     @POST("setFriends")
     void setFriends();

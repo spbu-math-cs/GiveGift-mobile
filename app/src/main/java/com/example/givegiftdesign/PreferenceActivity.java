@@ -15,14 +15,17 @@ import android.widget.TextView;
 
 import com.example.givegiftdesign.preference.PreferenceBlock;
 import com.example.givegiftdesign.preference.Price;
+import com.example.givegiftdesign.request.Account;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PreferenceActivity extends AppCompatActivity {
     private FlexboxLayout preferencesContainerLayout;
     private ArrayList<String> containedPref = new ArrayList<>();
+    private List<String> prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,15 @@ public class PreferenceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preference);
 
         preferencesContainerLayout = findViewById(R.id.flexbox);
+
+        // Отрисовывем полученные с веба интересы
+        prefs = Account.getInterests();
+        containedPref.addAll(prefs);
+        for(String str: prefs) {
+            // Добавляем сделанный CardView в основной layout
+            View prefView = drawPref().prefViewParam(str);
+            preferencesContainerLayout.addView(prefView);
+        }
 
         // Открывает список со списком возможных предпочтений
         FloatingActionButton fab = findViewById(R.id.fab_add);
@@ -56,6 +68,29 @@ public class PreferenceActivity extends AppCompatActivity {
         fab_accept.setOnClickListener(view -> finish());
     }
 
+    // Форма для заготовки CardView с предпочтением
+    private PreferenceBlock drawPref() {
+        // Самый внешний элемент, который может задать border radius
+        CardView cardViewBlock = new CardView(PreferenceActivity.this);
+        // В этом слое можно правильно расположить элементы
+        ConstraintLayout innerBlock = new ConstraintLayout(PreferenceActivity.this);
+        // Название предпочтения
+        TextView pref = new TextView(PreferenceActivity.this);
+        // Кнопка для удаления предпочтения из внешнего layout
+        Button closeBtn = new Button(PreferenceActivity.this);
+
+        PreferenceBlock prefBlock = new PreferenceBlock(
+                cardViewBlock,
+                innerBlock,
+                pref,
+                closeBtn,
+                getResources(),
+                containedPref
+        );
+
+        return prefBlock;
+    }
+
     private void onAddPref(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.inflate(R.menu.pref_menu);
@@ -68,26 +103,9 @@ public class PreferenceActivity extends AppCompatActivity {
                     return false;
                 } else {
                     containedPref.add(selectedItem);
-                    // Самый внешний элемент, который может задать border radius
-                    CardView cardViewBlock = new CardView(PreferenceActivity.this);
-                    // В этом слое можно правильно расположить элементы
-                    ConstraintLayout innerBlock = new ConstraintLayout(PreferenceActivity.this);
-                    // Название предпочтения
-                    TextView pref = new TextView(PreferenceActivity.this);
-                    // Кнопка для удаления предпочтения из внешнего layout
-                    Button closeBtn = new Button(PreferenceActivity.this);
-
-                    PreferenceBlock prefBlock = new PreferenceBlock(
-                            cardViewBlock,
-                            innerBlock,
-                            pref,
-                            closeBtn,
-                            getResources(),
-                            containedPref
-                    );
 
                     // Добавляем сделанный CardView в основной layout
-                    View prefView = prefBlock.prefViewParam(selectedItem);
+                    View prefView = drawPref().prefViewParam(selectedItem);
                     preferencesContainerLayout.addView(prefView);
 
                     return true;
