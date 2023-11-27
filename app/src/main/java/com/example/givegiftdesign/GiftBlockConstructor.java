@@ -1,5 +1,6 @@
 package com.example.givegiftdesign;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -78,6 +79,7 @@ public class GiftBlockConstructor {
      * Устанавливаются CardView -> LinearLayout -> ImageView -> TextView -> Button ->
      * добавляем в LinearLayout -> LinearLayout добавляем в CardView
      */
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void setGiftBlock() {
         // Задание CardView для скругленных углов
         final int cardMargin = (int) TypedValue.applyDimension(

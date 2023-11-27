@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PreferenceActivity extends AppCompatActivity {
 
@@ -93,16 +94,14 @@ public class PreferenceActivity extends AppCompatActivity {
      * @return - PreferenceBlock, в котором программно создаются и группируются нужные компоненты
      */
     private PreferenceBlock drawPref() {
-        PreferenceBlock prefBlock = new PreferenceBlock(
-                new CardView(PreferenceActivity.this),
-                new ConstraintLayout(PreferenceActivity.this),
-                new TextView(PreferenceActivity.this),
-                new Button(PreferenceActivity.this),
+        return new PreferenceBlock(
+                new CardView(this),
+                new ConstraintLayout(this),
+                new TextView(this),
+                new Button(this),
                 getResources(),
                 containedPref
         );
-
-        return prefBlock;
     }
 
     /**
@@ -115,7 +114,7 @@ public class PreferenceActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                String selectedItem = item.getTitle().toString();
+                String selectedItem = Objects.requireNonNull(item.getTitle()).toString();
 
                 if (containedPref.contains(selectedItem)) {
                     return false;

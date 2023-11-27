@@ -18,12 +18,13 @@ import android.view.Menu;
 
 import com.example.givegiftdesign.request.Request;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageView giftImageView;
-    private TextView giftDescription;
-    private Button giftSearch;
+
+    /**
+     * При запуске приложения запрашивается инфа с веба и инициализиует все необходимые поля
+     * например 'предпочтения', 'аккаунт' и тп
+     */
     private Request request;
 
     // Тестовый объект
@@ -35,11 +36,20 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-
-
+    /**
+     * В этот слой добавляются сгенерированные идеи для подарка
+     */
     LinearLayoutCompat mainLayout;
 
     // Люблю попугов
+
+    /**
+     * Точка входа в приложение
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,27 +60,22 @@ public class MainActivity extends AppCompatActivity {
         request.req();
         //
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mainLayout = findViewById(R.id.gift_layout);
 
+        // Кнопка для генерации идей на основе предпочтений
         Button giftIdeaBtn = findViewById(R.id.gift_idea);
         giftIdeaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CardView cardView = new CardView(MainActivity.this);
-                LinearLayout linearLayout = new LinearLayout(MainActivity.this);
-                ImageView imageView = new ImageView(MainActivity.this);
-                TextView textView = new TextView(MainActivity.this);
-                Button button = new Button(MainActivity.this);
-
                 GiftBlockConstructor giftBlockConstructor = new GiftBlockConstructor(
-                        cardView,
-                        linearLayout,
-                        imageView,
-                        textView,
-                        button,
+                        new CardView(MainActivity.this),
+                        new LinearLayout(MainActivity.this),
+                        new ImageView(MainActivity.this),
+                        new TextView(MainActivity.this),
+                        new Button(MainActivity.this),
                         getResources()
                 );
 
@@ -78,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 mainLayout.addView(giftIdeaView);
             }
         });
+        //
 
 //        giftImageView = findViewById(R.id.gift_image_one);
 //        giftDescription = findViewById(R.id.gift_desc_one);
@@ -91,19 +97,32 @@ public class MainActivity extends AppCompatActivity {
 //
 //        displayGiftBlockInfo(giftBlock());
 
+        // Кнопка для перехода в activity, где происходит выбор предпочтений и цены
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PreferenceActivity.class)));
     }
 
+    /**
+     * Скорее всего уже не нужно
+     * Данный код был перенесен в GiftBlockConstructor
+     * @param gb - ignored
+     */
+    @Deprecated
     private void displayGiftBlockInfo(GiftBlock gb) {
         // Временный код
         // Показывает как получить картинку из инета и заменить её в activity_main
-        Picasso.get().load(gb.getImageUrl()).into(giftImageView);
-        giftDescription.setText(gb.getDescription());
+//        Picasso.get().load(gb.getImageUrl()).into(giftImageView);
+//        giftDescription.setText(gb.getDescription());
 
         // Логика кнопки может находиться в другом месте
     }
 
+    /**
+     * Меню с возможностью перехода по activity профиль, друзья и тп
+     * @param item The menu item that was selected.
+     *
+     * @return - true/false
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getOrder()) {
@@ -124,6 +143,12 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Просто создается меню для доступа к профилю, друзьям и выходу
+     * @param menu The options menu in which you place your items.
+     *
+     * @return - true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);

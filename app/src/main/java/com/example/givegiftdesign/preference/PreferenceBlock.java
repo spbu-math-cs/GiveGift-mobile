@@ -1,5 +1,6 @@
 package com.example.givegiftdesign.preference;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.TypedValue;
@@ -92,6 +93,7 @@ public class PreferenceBlock {
      * Устанавливаются CardView -> ConstrainedLayout -> TextView -> Button ->
      * добавляем в ConstrainedLayout -> ConstraintSet -> добавляем ConstraintSet в CardView
      */
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void setPrefBlock() {
         // Самый внешний элемент, который может задать border radius
         final int cardMargin = (int) TypedValue.applyDimension(
