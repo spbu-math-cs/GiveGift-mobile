@@ -23,10 +23,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PreferenceActivity extends AppCompatActivity {
+
+    /**
+     * Контейнер, куда помещаются программно созданные CardView с предпочтениями
+     */
     private FlexboxLayout preferencesContainerLayout;
+
+    /**
+     * Содержит в себе весь список указанных предпочтений
+     * Нужен для проверки выбора уже имеющихся предпочтений
+     */
     private ArrayList<String> containedPref = new ArrayList<>();
+
+    /**
+     * Предпочтения, полученные из веба для аккаунта
+     */
     private List<String> prefs;
 
+    /**
+     * Запускается при создании activity
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +79,7 @@ public class PreferenceActivity extends AppCompatActivity {
         Price priceHandler = new Price();
         priceHandler.handle(seekBarPrice, minPrice, maxPrice);
 
-        // Нижняя левя кнопка отменяет изменения
+        // Нижняя левая кнопка отменяет изменения
         FloatingActionButton fab_decline = findViewById(R.id.fab_decline);
         fab_decline.setOnClickListener(view -> finish());
 
@@ -68,22 +88,16 @@ public class PreferenceActivity extends AppCompatActivity {
         fab_accept.setOnClickListener(view -> finish());
     }
 
-    // Форма для заготовки CardView с предпочтением
+    /**
+     * Подготавливает CardView, в котором находятся строка с предпочтением и кнопка закрытия
+     * @return - PreferenceBlock, в котором программно создаются и группируются нужные компоненты
+     */
     private PreferenceBlock drawPref() {
-        // Самый внешний элемент, который может задать border radius
-        CardView cardViewBlock = new CardView(PreferenceActivity.this);
-        // В этом слое можно правильно расположить элементы
-        ConstraintLayout innerBlock = new ConstraintLayout(PreferenceActivity.this);
-        // Название предпочтения
-        TextView pref = new TextView(PreferenceActivity.this);
-        // Кнопка для удаления предпочтения из внешнего layout
-        Button closeBtn = new Button(PreferenceActivity.this);
-
         PreferenceBlock prefBlock = new PreferenceBlock(
-                cardViewBlock,
-                innerBlock,
-                pref,
-                closeBtn,
+                new CardView(PreferenceActivity.this),
+                new ConstraintLayout(PreferenceActivity.this),
+                new TextView(PreferenceActivity.this),
+                new Button(PreferenceActivity.this),
                 getResources(),
                 containedPref
         );
@@ -91,6 +105,10 @@ public class PreferenceActivity extends AppCompatActivity {
         return prefBlock;
     }
 
+    /**
+     * Меню, которое вызывается при нажании на FloatingActionButton в блоке 'Предпочтения'
+     * @param view - окошко (см. документацию) )
+     */
     private void onAddPref(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.inflate(R.menu.pref_menu);
@@ -107,6 +125,9 @@ public class PreferenceActivity extends AppCompatActivity {
                     // Добавляем сделанный CardView в основной layout
                     View prefView = drawPref().prefViewParam(selectedItem);
                     preferencesContainerLayout.addView(prefView);
+
+                    // После каждого добавления предпочтения обновляется список предпочтений аккаунта
+                    Account.updateInterests(containedPref);
 
                     return true;
                 }

@@ -20,6 +20,10 @@ public class Account {
         interests.add("Походы");
     }
 
+    public static void updateInterests(List<String> inter) {
+        interests = inter;
+    }
+
     public static List<String> getInterests() {
         return interests;
     }

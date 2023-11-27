@@ -18,7 +18,18 @@ import androidx.cardview.widget.CardView;
 import com.squareup.picasso.Picasso;
 
 public class GiftBlockConstructor {
-    public GiftBlockConstructor(CardView cardView, LinearLayout linearLayout, ImageView imageView, TextView textView, Button button, Resources resources) {
+
+    /**
+     * Помимо присвоения переменных в конструкторе конструируется блок
+     * @param cardView - внешний контейнер
+     * @param linearLayout - внутренний контейнер
+     * @param imageView - картинка из инета
+     * @param textView - описание товара
+     * @param button - кнопка 'перейти по ссылке'
+     * @param resources - размерности
+     */
+    public GiftBlockConstructor(CardView cardView, LinearLayout linearLayout, ImageView imageView,
+                                TextView textView, Button button, Resources resources) {
         this.cardView = cardView;
         this.linearLayout = linearLayout;
         this.imageView = imageView;
@@ -36,6 +47,11 @@ public class GiftBlockConstructor {
     Button button;
     Resources resources;
 
+    /**
+     * Берет картинку из сети и присваивает imageView
+     * @param gb - куда присвоить картинку
+     * @return - CardView с присвоенной картинкой
+     */
     public View giftViewParams(GiftBlock gb) {
         Picasso.get().load(gb.getImageUrl()).into(imageView);
         textView.setText(gb.getDescription());
@@ -44,6 +60,10 @@ public class GiftBlockConstructor {
         return cardView;
     }
 
+    /**
+     * По нажатии на кнопку переходит по ссылке
+     * @param url - ссылка
+     */
     private void setUrlBtn(String url) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +74,10 @@ public class GiftBlockConstructor {
         });
     }
 
+    /**
+     * Устанавливаются CardView -> LinearLayout -> ImageView -> TextView -> Button ->
+     * добавляем в LinearLayout -> LinearLayout добавляем в CardView
+     */
     private void setGiftBlock() {
         // Задание CardView для скругленных углов
         final int cardMargin = (int) TypedValue.applyDimension(
@@ -85,6 +109,7 @@ public class GiftBlockConstructor {
         linearLayout.setGravity(Gravity.CENTER);
         //
 
+        // Картинка из инета
         final int imgSize = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.main_img_size),
@@ -121,6 +146,7 @@ public class GiftBlockConstructor {
         imageView.setImageResource(R.mipmap.ic_launcher);
         //
 
+        // Описание товара
         final int textMarginStart = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.main_text_margin_start),
@@ -153,6 +179,7 @@ public class GiftBlockConstructor {
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         //
 
+        // Кнопка для перехода по ссылке
         final int buttonWidth = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.main_button_width),
@@ -200,6 +227,5 @@ public class GiftBlockConstructor {
         linearLayout.addView(button);
 
         cardView.addView(linearLayout);
-
     }
 }
