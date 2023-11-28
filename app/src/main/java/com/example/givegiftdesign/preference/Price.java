@@ -6,12 +6,13 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 public class Price {
+    private final int MULT = 1500;
     public void handle(SeekBar seekBarPrice, EditText minPrice, EditText maxPrice) {
         // Изменяет значение в EditText
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                maxPrice.setText(String.valueOf(progress));
+                maxPrice.setText(String.valueOf(progress * MULT));
             }
 
             @Override
@@ -53,7 +54,7 @@ public class Price {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().isEmpty()) {
-                    int progress = Integer.parseInt(s.toString());
+                    int progress = Integer.parseInt(s.toString()) / MULT;
                     seekBarPrice.setProgress(progress);
                     maxPrice.setSelection(maxPrice.getText().length());
                 }

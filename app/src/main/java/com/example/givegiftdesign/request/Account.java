@@ -16,8 +16,8 @@ public class Account {
         interests = new ArrayList<>();
 
         interests.add("Кино");
-        interests.add("Мультфильмы");
-        interests.add("Походы");
+        interests.add("Романтика");
+        interests.add("Книги");
     }
 
     public static void updateInterests(List<String> inter) {

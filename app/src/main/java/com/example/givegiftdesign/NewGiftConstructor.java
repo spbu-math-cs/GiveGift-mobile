@@ -15,13 +15,15 @@ public class NewGiftConstructor {
     ImageView imageView;
     TextView textView;
     Button button;
+    MainActivity m;
 
     /**
      * Помимо присвоения переменных в конструкторе вызывается шаблон блока
      * @param view - шаблон блока
      */
-    public NewGiftConstructor(View view) {
+    public NewGiftConstructor(View view, MainActivity mainActivity) {
         includedGiftBlock = view;
+        m = mainActivity;
 
         imageView = includedGiftBlock.findViewById(R.id.gift_image);
         textView = includedGiftBlock.findViewById(R.id.gift_desc_two);
@@ -46,12 +48,9 @@ public class NewGiftConstructor {
      * @param url - ссылка
      */
     private void setUrlBtn(String url) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-
-            }
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            m.startActivity(intent);
         });
     }
 }

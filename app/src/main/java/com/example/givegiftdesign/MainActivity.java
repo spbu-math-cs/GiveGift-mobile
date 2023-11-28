@@ -16,6 +16,8 @@ import android.view.Menu;
 import com.example.givegiftdesign.request.Request;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
                 "https://imgur.com/gallery/67tSocD"
         );
     }
+
+    private ArrayList<GiftBlock> giftBlocks;
 
     /**
      * В этот слой добавляются сгенерированные идеи для подарка
@@ -52,6 +56,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        giftBlocks = new ArrayList<>();
+        giftBlocks.add(new GiftBlock(
+                "https://basket-10.wb.ru/vol1508/part150806/150806145/images/big/1.jpg",
+                "Фонарик",
+                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%A4%D0%BE%D0%BD%D0%B0%D1%80%D0%B8%D0%BA&priceU=000%3B3600000#c150806145"
+        ));
+        giftBlocks.add(new GiftBlock(
+                "https://basket-05.wb.ru/vol835/part83504/83504705/images/big/1.jpg",
+                "Книга",
+                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9A%D0%BD%D0%B8%D0%B3%D0%B0&priceU=000%3B3600000"
+        ));
+        giftBlocks.add(new GiftBlock(
+                "https://basket-02.wb.ru/vol179/part17998/17998675/images/big/1.jpg",
+                "Плакат",
+                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9F%D0%BB%D0%B0%D0%BA%D0%B0%D1%82&priceU=000%3B3600000"
+        ));
+        giftBlocks.add(new GiftBlock(
+                "https://basket-12.wb.ru/vol1837/part183731/183731287/images/big/1.jpg",
+                "Альбом",
+                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%90%D0%BB%D1%8C%D0%B1%D0%BE%D0%BC&priceU=000%3B3600000"
+        ));
+        giftBlocks.add(new GiftBlock(
+                "https://basket-10.wb.ru/vol1404/part140484/140484930/images/big/1.jpg",
+                "Компас",
+                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D1%81&priceU=000%3B3600000"
+        ));
+
         // Тут производится запрос
         request = new Request();
         request.req();
@@ -68,12 +99,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
-                        getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false)
-                );
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-                View giftIdeaView = newGiftConstructor.giftViewParams(giftBlock());
-                mainLayout.addView(giftIdeaView);
+                for (GiftBlock gb : giftBlocks) {
+
+                    NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
+                            getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false),
+                            MainActivity.this
+                    );
+
+                    View giftIdeaView = newGiftConstructor.giftViewParams(gb);
+                    mainLayout.addView(giftIdeaView);
+
+                }
             }
         });
         //
