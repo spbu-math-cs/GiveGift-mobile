@@ -52,7 +52,7 @@
                 android:background="@drawable/orange_button_background"
                 android:drawableStart="@drawable/basket"
                 android:padding="10dp"
-                android:text="@string/megamarket"
+                android:text="@string/wildberries"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
