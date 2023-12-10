@@ -3,6 +3,7 @@ package com.example.givegiftdesign;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.example.givegiftdesign.request.Request;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         //
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.baseline_account_circle_24));
         setSupportActionBar(toolbar);
 
         mainLayout = findViewById(R.id.gift_layout);

@@ -262,7 +262,7 @@ public class GiftBlockConstructor {
         button.setBackground(resources.getDrawable(R.drawable.orange_button_background));
         button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.basket, 0, 0, 0);
         button.setPadding(buttonPadding, 0, 0, 0);
-        button.setText(resources.getText(R.string.megamarket));
+        button.setText(resources.getText(R.string.wildberries));
         button.setAllCaps(false);
         button.setTextColor(Color.WHITE);
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
