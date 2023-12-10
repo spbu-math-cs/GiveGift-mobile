@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "511354409752",
+    "project_id": "givegift-241db",
+    "storage_bucket": "givegift-241db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511354409752:android:838636f243f2943f5d046d",
+        "android_client_info": {
+          "package_name": "com.example.givegiftdesign"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2mtI_84NUJZ8fzT7Kl9LcaTJePPrHzzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
