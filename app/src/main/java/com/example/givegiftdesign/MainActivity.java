@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,9 +22,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.givegiftdesign.profilescreen.api.MyretrofitClient;
@@ -93,30 +96,18 @@ public class MainActivity extends AppCompatActivity {
 
         createNotificationChannel();
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        Intent intent = new Intent(MainActivity.this, Reminder.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.logout)
-                .setContentTitle("Reminder")
-                .setContentText("Давно тебя не было в уличных гонках")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        notificationManager.notify(1, builder.build());
+        long timeAtSys = System.currentTimeMillis();
+        long twoSecs = 5 * 1000;
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                timeAtSys + twoSecs,
+                pendingIntent);
 
         giftBlocks = new ArrayList<>();
         giftBlocks.add(new GiftBlock(
@@ -156,17 +147,24 @@ public class MainActivity extends AppCompatActivity {
 
         mainLayout = findViewById(R.id.gift_layout);
 
+        ImageView mascot = findViewById(R.id.maskot);
+
         // Кнопка для генерации идей на основе предпочтений
         Button giftIdeaBtn = findViewById(R.id.gift_idea);
         giftIdeaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                mascot.setImageResource(R.mipmap.gift_foreground);
+
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+
+                ViewGroup parent = (ViewGroup) mascot.getParent();
+                parent.removeView(mascot);
 
                 for (GiftBlock gb : giftBlocks) {
 
@@ -205,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                         String msg = getString(R.string.msg_token_fmt, token);
 //                        String msg = token;
                         Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

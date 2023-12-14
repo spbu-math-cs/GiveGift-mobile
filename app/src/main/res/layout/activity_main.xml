@@ -35,10 +35,21 @@
             android:stackFromBottom="true"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="10dp"
+            android:gravity="center">
             <!-- android:layout_gravity="center">-->
 <!--            android:divider="@drawable/empty_tall_divider"-->
 <!--            android:dividerPadding="20dp"-->
+
+            <ImageView
+                android:id="@+id/maskot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="1.8"
+                android:scaleY="1.8"
+                android:src="@mipmap/greetings_foreground">
+
+            </ImageView>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
