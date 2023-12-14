@@ -18,41 +18,48 @@ public class Request {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-//        PreferenceApi prefApi = retrofit.create(PreferenceApi.class);
-        ServerApi serverApi = retrofit.create(ServerApi.class);
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://ip.jsontest.com/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
 
-//        Call<List<Preference>> prefs = prefApi.prefs();
-        Call<Account> acc = serverApi.getAccount();
+        PreferenceApi prefApi = retrofit.create(PreferenceApi.class);
+//        TestApi testApi = retrofit.create(TestApi.class);
 
-//        prefs.enqueue(new Callback<List<Preference>>() {
-//            @Override
-//            public void onResponse(Call<List<Preference>> call, Response<List<Preference>> response) {
-//                if (response.isSuccessful())
-//                    Log.d("Callback", "response: " + response.body().size());
-//                else
-//                    Log.d("Response code", "response code " + response.code());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Preference>> call, Throwable t) {
-//                Log.w("Failure", "failure: " + t);
-//            }
-//        });
+        Call<List<Preference>> prefs = prefApi.prefs();
+//        Call<List<Test>> acc = testApi.data();
 
-        acc.enqueue(new Callback<Account>() {
+        prefs.enqueue(new Callback<List<Preference>>() {
             @Override
-            public void onResponse(Call<Account> call, Response<Account> response) {
-                if (response.isSuccessful())
-                    Log.d("Callback", "response: " + response.body());
+            public void onResponse(Call<List<Preference>> call, Response<List<Preference>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Callback", "response: " + response.body().size());
+                    Log.d("Callback body", "response: " + response.body().get(0));
+                }
                 else
                     Log.d("Response code", "response code " + response.code());
             }
 
             @Override
-            public void onFailure(Call<Account> call, Throwable t) {
+            public void onFailure(Call<List<Preference>> call, Throwable t) {
                 Log.w("Failure", "failure: " + t);
             }
         });
+
+//        acc.enqueue(new Callback<List<Test>>() {
+//            @Override
+//            public void onResponse(Call<List<Test>> call, Response<List<Test>> response) {
+//                if (response.isSuccessful())
+//                    Log.d("Callback", "response: " + response.body());
+//                else
+//                    Log.d("Response code", "response code " + response.code());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Test>> call, Throwable t) {
+//                Log.w("Failure", "failure: " + t);
+//            }
+//        });
 
         // Временная заглушка на предпочтения
         Account.tempInterests();
