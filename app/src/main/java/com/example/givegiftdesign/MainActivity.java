@@ -1,5 +1,8 @@
 package com.example.givegiftdesign;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -13,9 +16,14 @@ import android.view.View;
 import android.widget.Button;
 
 import android.view.Menu;
+import android.widget.Toast;
 
+import com.example.givegiftdesign.profilescreen.api.MyretrofitClient;
 import com.example.givegiftdesign.request.Request;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -126,6 +134,28 @@ public class MainActivity extends AppCompatActivity {
         // Кнопка для перехода в activity, где происходит выбор предпочтений и цены
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PreferenceActivity.class)));
+
+        // cWcinszDWy-weZftXcde5r:APA91bFDM0auwB-JRL0d2Nbf7EVYqczI-PlzfXlmTm-31dr_yopZQglKr1tz7jEiTx5stC7a-stsizIsN2rGubJeo9QCVwpi8L3ClZ3si-7nyJPHwKXFqs73dwTLHIfMTqoQyzRgoMeo
+        // Получаем токен устрйства для возможности отправки попапов
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        // Log and toast
+//                        String msg = getString(R.string.msg_token_fmt, token);
+                        String msg = token;
+                        Log.d(TAG, msg);
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     /**
