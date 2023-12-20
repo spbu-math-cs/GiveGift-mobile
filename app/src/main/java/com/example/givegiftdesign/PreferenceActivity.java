@@ -18,6 +18,7 @@ import com.example.givegiftdesign.preference.Price;
 import com.example.givegiftdesign.request.Account;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.RangeSlider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class PreferenceActivity extends AppCompatActivity {
         });
 
         // Контактирует с полем Price
-        SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
+        RangeSlider seekBarPrice = findViewById(R.id.seekBarPrice);
         EditText minPrice = findViewById(R.id.minPrice);
         EditText maxPrice = findViewById(R.id.maxPrice);
         Price priceHandler = new Price();

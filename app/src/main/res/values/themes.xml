@@ -7,6 +7,11 @@
 
     </style>
 
+    <style name="MyMaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Add attributes here -->
+        <item name="colorPrimary">@color/orange</item>
+    </style>
+
     <style name="Theme.GiveGiftDesign" parent="Base.Theme.GiveGiftDesign" />
 
     <style name="Toolbar">
