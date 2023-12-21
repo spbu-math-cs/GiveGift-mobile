@@ -6,7 +6,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:weightSum="8"
         android:background="@drawable/orange_background"
         tools:context=".LoginActivity">
 
