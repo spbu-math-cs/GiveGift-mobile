@@ -35,7 +35,7 @@ public class RegistryActivity extends AppCompatActivity {
 
         signupButton.setOnClickListener(view -> {
 
-            database = FirebaseDatabase.getInstance();
+            database = FirebaseDatabase.getInstance("https://givegift-241db-default-rtdb.europe-west1.firebasedatabase.app/");
             reference = database.getReference("users");
 
             String name = signupName.getText().toString();
