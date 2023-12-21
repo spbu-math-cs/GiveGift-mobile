@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:paddingBottom="20dp"
-    android:layout_margin="10dp"
+    android:layout_margin="25dp"
     app:cardCornerRadius="@dimen/cardview_cornerradius"
     >
 
@@ -28,21 +28,24 @@
 
                 <ImageView
                     android:id="@+id/gift_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:contentDescription="@string/gift_img"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    android:scaleType="center"
+                    app:srcCompat="@mipmap/img_foreground" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/gift_desc_two"
                 style="@style/Description"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
                 android:text="@string/gift_desc"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/gift_search_two"

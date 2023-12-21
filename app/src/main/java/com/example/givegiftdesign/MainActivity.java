@@ -48,15 +48,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private Request request;
 
-    // Тестовый объект
-    private GiftBlock giftBlock() {
-        return new GiftBlock(
-                "https://i.imgur.com/67tSocD.jpeg",
-                "Попуг",
-                "https://imgur.com/gallery/67tSocD"
-        );
-    }
-
     private ArrayList<GiftBlock> giftBlocks;
 
     /**
@@ -94,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Уведомления
         createNotificationChannel();
 
         Intent intent = new Intent(MainActivity.this, Reminder.class);
@@ -108,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.set(AlarmManager.RTC_WAKEUP,
                 timeAtSys + twoSecs,
                 pendingIntent);
+        //
 
         giftBlocks = new ArrayList<>();
         giftBlocks.add(new GiftBlock(
@@ -158,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 mascot.setImageResource(R.mipmap.gift_foreground);
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(0);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

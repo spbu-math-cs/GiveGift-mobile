@@ -21,15 +21,15 @@ public class Price {
             @Override
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
                 values = slider.getValues();
-                minPrice.setText(String.valueOf(values.get(0)));
-                maxPrice.setText(String.valueOf(values.get(1)));
+                minPrice.setText(String.valueOf(Math.floor(values.get(0))));
+                maxPrice.setText(String.valueOf(Math.floor(values.get(1))));
             }
 
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 values = slider.getValues();
-                minPrice.setText(String.valueOf(values.get(0)));
-                maxPrice.setText(String.valueOf(values.get(1)));
+                minPrice.setText(String.valueOf(Math.floor(values.get(0))));
+                maxPrice.setText(String.valueOf(Math.floor(values.get(1))));
             }
         }
     );
