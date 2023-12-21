@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case 3:
                 Log.d("Exit", "clicked");
-                startActivity(new Intent(this, RegistryActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 return true;
         }
 

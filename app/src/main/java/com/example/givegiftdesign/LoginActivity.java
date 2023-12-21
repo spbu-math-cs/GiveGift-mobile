@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+// import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,23 +33,17 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         signupRedirectText = findViewById(R.id.signupRedirectText);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!validateUsername() | !validatePassword()) {
-
-                } else {
-                    checkUser();
-                }
+        loginButton.setOnClickListener(view -> {
+            if (!validateUsername() | !validatePassword()) {
+                loginPassword.setError("Password cannot be empty");
+            } else {
+                checkUser();
             }
         });
 
-        signupRedirectText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
-                startActivity(intent);
-            }
+        signupRedirectText.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
+            startActivity(intent);
         });
 
     }
@@ -93,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginUsername.setError(null);
                     String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
 
+                    assert passwordFromDB != null;
                     if (passwordFromDB.equals(userPassword)) {
                         loginUsername.setError(null);
 

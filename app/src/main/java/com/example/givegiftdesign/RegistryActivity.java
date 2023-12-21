@@ -3,7 +3,7 @@ package com.example.givegiftdesign;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.view.View;
+// import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,33 +33,27 @@ public class RegistryActivity extends AppCompatActivity {
         loginRedirectText = findViewById(R.id.loginRedirectText);
         signupButton = findViewById(R.id.signup_button);
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        signupButton.setOnClickListener(view -> {
 
-                database = FirebaseDatabase.getInstance();
-                reference = database.getReference("users");
+            database = FirebaseDatabase.getInstance();
+            reference = database.getReference("users");
 
-                String name = signupName.getText().toString();
-                String email = signupEmail.getText().toString();
-                String username = signupUsername.getText().toString();
-                String password = signupPassword.getText().toString();
+            String name = signupName.getText().toString();
+            String email = signupEmail.getText().toString();
+            String username = signupUsername.getText().toString();
+            String password = signupPassword.getText().toString();
 
-                HelperClass helperClass = new HelperClass(name, email, username, password);
-                reference.child(username).setValue(helperClass);
+            HelperClass helperClass = new HelperClass(name, email, username, password);
+            reference.child(username).setValue(helperClass);
 
-                Toast.makeText(RegistryActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
+            Toast.makeText(RegistryActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
-        loginRedirectText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        loginRedirectText.setOnClickListener(view -> {
+            Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
     }
 }
