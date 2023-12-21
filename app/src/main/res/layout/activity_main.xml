@@ -40,8 +40,16 @@
             <!-- android:layout_gravity="center">-->
 <!--            android:divider="@drawable/empty_tall_divider"-->
 <!--            android:dividerPadding="20dp"-->
+            
+            <ImageButton
+                    android:id="@+id/daric_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/greetings_foreground"
+                    android:gravity="center">
+            </ImageButton>
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/maskot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +57,7 @@
                 android:scaleY="1.8"
                 android:src="@mipmap/greetings_foreground">
 
-            </ImageView>
+            </ImageView>-->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
