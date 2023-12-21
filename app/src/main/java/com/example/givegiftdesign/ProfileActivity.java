@@ -38,16 +38,16 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        profileimage=(ImageView)findViewById(R.id.profile_image);
-        username=(TextView)findViewById(R.id.username);
-        userpost=(TextView)findViewById(R.id.posts);
-        userinfo=(TextView)findViewById(R.id.about);
-        userfollower=(TextView)findViewById(R.id.follower);
-        userfollowing=(TextView)findViewById(R.id.following);
+        profileimage= findViewById(R.id.profile_image);
+        username= findViewById(R.id.username);
+        userpost= findViewById(R.id.posts);
+        userinfo= findViewById(R.id.about);
+        userfollower= findViewById(R.id.follower);
+        userfollowing= findViewById(R.id.following);
 
         getuserdata();
 
-        collection=(RecyclerView)findViewById(R.id.rec_collection);
+        collection= findViewById(R.id.rec_collection);
         collection.setHasFixedSize(true);
         collection.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         getcollectiondata();

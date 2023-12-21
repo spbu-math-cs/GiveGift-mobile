@@ -26,6 +26,12 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
+                android:name=".LoginActivity"
+                android:exported="false" />
+        <activity
+                android:name=".RegistryActivity"
+                android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
