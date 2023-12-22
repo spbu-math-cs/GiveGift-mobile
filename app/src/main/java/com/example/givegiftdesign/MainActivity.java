@@ -2,13 +2,10 @@ package com.example.givegiftdesign;
 
 import static android.content.ContentValues.TAG;
 
-// import androidx.annotation.NonNull;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
-/*import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;*/
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
@@ -17,8 +14,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-// import android.content.pm.PackageManager;
-// import android.os.Build;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -29,22 +25,23 @@ import android.widget.Button;
 
 import android.view.Menu;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-// import android.widget.Toast;
 
-// import com.example.givegiftdesign.profilescreen.api.MyretrofitClient;
 import com.example.givegiftdesign.request.Request;
-// import com.google.android.gms.tasks.OnCompleteListener;
-// import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
-// import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String CHANNEL_ID = "1";
+    /**
+     * При запуске приложения запрашивается инфа с веба и инициализиует все необходимые поля
+     * например 'предпочтения', 'аккаунт' и тп
+     */
+    private Request request;
 
     private ArrayList<GiftBlock> giftBlocks;
 
@@ -58,15 +55,17 @@ public class MainActivity extends AppCompatActivity {
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is not in the Support Library.
-        CharSequence name = getString(R.string.channel_name);
-        String description = getString(R.string.channel_description);
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-        channel.setDescription(description);
-        // Register the channel with the system; you can't change the importance
-        // or other notification behaviors after this.
-        NotificationManager notificationManager = getSystemService(NotificationManager.class);
-        notificationManager.createNotificationChannel(channel);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this.
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     /**
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
          * При запуске приложения запрашивается инфа с веба и инициализиует все необходимые поля
          * например 'предпочтения', 'аккаунт' и тп
          */
-        Request request = new Request();
+        request = new Request();
         request.req();
         //
 
@@ -141,45 +140,52 @@ public class MainActivity extends AppCompatActivity {
 
         mainLayout = findViewById(R.id.gift_layout);
 
-        // ImageView mascot = findViewById(R.id.maskot);
-
-        ImageButton imageButton;
-        setContentView(R.layout.activity_main);
-        imageButton = findViewById(R.id.daric_button);
-        imageButton.setOnTouchListener((view, motionEvent) -> {
-            if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                imageButton.setImageResource(R.mipmap.greetings_foreground);
-            }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                imageButton.setImageResource(R.mipmap.logout_foreground);
+        // Ципа dancing
+        ImageButton mascot = findViewById(R.id.maskot);
+        final boolean[] isChanged = {false};
+        mascot.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN && isChanged[0]){
+                    mascot.setImageResource(R.mipmap.greetings_foreground);
+                    isChanged[0] = false;
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    mascot.setImageResource(R.mipmap.gift_foreground);
+                    isChanged[0] = true;
+                }
+                return false;
             }
-            return false;
         });
 
         // Кнопка для генерации идей на основе предпочтений
         Button giftIdeaBtn = findViewById(R.id.gift_idea);
-        giftIdeaBtn.setOnClickListener(v -> {
+        giftIdeaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            // mascot.setImageResource(R.mipmap.gift_foreground);
+                mascot.setImageResource(R.mipmap.gift_foreground);
 
-            try {
-                Thread.sleep(0);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+                try {
+                    Thread.sleep(0);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            /*ViewGroup parent = (ViewGroup) mascot.getParent();
-            parent.removeView(mascot);*/
+                ViewGroup parent = (ViewGroup) mascot.getParent();
+                parent.removeView(mascot);
 
-            for (GiftBlock gb : giftBlocks) {
+                for (GiftBlock gb : giftBlocks) {
 
-                NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
-                        getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false),
-                        MainActivity.this
-                );
+                    NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
+                            getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false),
+                            MainActivity.this
+                    );
 
-                View giftIdeaView = newGiftConstructor.giftViewParams(gb);
-                mainLayout.addView(giftIdeaView);
+                    View giftIdeaView = newGiftConstructor.giftViewParams(gb);
+                    mainLayout.addView(giftIdeaView);
 
+                }
             }
         });
         //
@@ -191,20 +197,23 @@ public class MainActivity extends AppCompatActivity {
         // cWcinszDWy-weZftXcde5r:APA91bFDM0auwB-JRL0d2Nbf7EVYqczI-PlzfXlmTm-31dr_yopZQglKr1tz7jEiTx5stC7a-stsizIsN2rGubJeo9QCVwpi8L3ClZ3si-7nyJPHwKXFqs73dwTLHIfMTqoQyzRgoMeo
         // Получаем токен устрйства для возможности отправки попапов
         FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                        return;
-                    }
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
 
-                    // Get new FCM registration token
-                    String token = task.getResult();
+                        // Get new FCM registration token
+                        String token = task.getResult();
 
-                    // Log and toast
-                    String msg = getString(R.string.msg_token_fmt, token);
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
 //                        String msg = token;
-                    Log.d(TAG, msg);
+                        Log.d(TAG, msg);
 //                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 

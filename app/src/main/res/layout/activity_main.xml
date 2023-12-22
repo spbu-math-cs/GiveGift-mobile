@@ -24,7 +24,8 @@
         android:paddingVertical="15dp"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:contentDescription="@string/gift_desc" >
+        android:contentDescription="@string/gift_desc"
+        android:fillViewport="true">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/gift_layout"
@@ -36,28 +37,26 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingBottom="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            >
             <!-- android:layout_gravity="center">-->
-<!--            android:divider="@drawable/empty_tall_divider"-->
-<!--            android:dividerPadding="20dp"-->
-            
-            <ImageButton
-                    android:id="@+id/daric_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/greetings_foreground"
-                    android:gravity="center">
-            </ImageButton>
+            <!--            android:divider="@drawable/empty_tall_divider"-->
+            <!--            android:dividerPadding="20dp"-->
 
-            <!--<ImageView
+
+            <ImageButton
                 android:id="@+id/maskot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleX="1.8"
-                android:scaleY="1.8"
-                android:src="@mipmap/greetings_foreground">
+                android:scaleX="2.5"
+                android:scaleY="2.5"
+                android:src="@mipmap/greetings_foreground"
+                android:contentDescription="Cipa"
+                android:background="@null"
+                >
 
-            </ImageView>-->
+            </ImageButton>
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -78,4 +77,4 @@
 
     <!--    app:layout_constraintTop_toBottomOf="@+id/main_toolbar"-->
 
-<!--<include layout="@layout/activity_main_gift" />-->
+    <!--<include layout="@layout/activity_main_gift" />-->
