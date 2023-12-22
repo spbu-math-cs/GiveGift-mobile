@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -21,11 +22,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.view.Menu;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
      *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
      *
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +134,10 @@ public class MainActivity extends AppCompatActivity {
         ));
 
         // Тут производится запрос
+        /**
+         * При запуске приложения запрашивается инфа с веба и инициализиует все необходимые поля
+         * например 'предпочтения', 'аккаунт' и тп
+         */
         request = new Request();
         request.req();
         //
@@ -140,7 +148,23 @@ public class MainActivity extends AppCompatActivity {
 
         mainLayout = findViewById(R.id.gift_layout);
 
-        ImageView mascot = findViewById(R.id.maskot);
+        // Ципа dancing
+        ImageButton mascot = findViewById(R.id.maskot);
+        final boolean[] isChanged = {false};
+        mascot.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN && isChanged[0]){
+                    mascot.setImageResource(R.mipmap.greetings_foreground);
+                    isChanged[0] = false;
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    mascot.setImageResource(R.mipmap.gift_foreground);
+                    isChanged[0] = true;
+                }
+                return false;
+            }
+        });
 
         // Кнопка для генерации идей на основе предпочтений
         Button giftIdeaBtn = findViewById(R.id.gift_idea);
