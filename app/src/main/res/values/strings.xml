@@ -34,4 +34,5 @@
     <string name="channel_name" translatable="false">Reminder</string>
     <string name="channel_description" translatable="false">Давно тебя не было в уличных гонках</string>
     <string name="price_range">Price range</string>
+    <string name="tagline">Making people happy :)</string>
 </resources>
