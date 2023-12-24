@@ -40,4 +40,5 @@
     <string name="about">About</string>
     <string name="example">Example</string>
     <string name="age">Age</string>
+    <string name="list_of_wishes">List of wishes</string>
 </resources>

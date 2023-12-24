@@ -23,7 +23,7 @@
             android:background="@drawable/baseline_account_circle_black_48"/>
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -38,7 +38,7 @@
             android:id="@+id/age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/username"
+            android:layout_below="@id/user_name"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/profile_image"
             android:includeFontPadding="false"
@@ -96,95 +96,54 @@
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:padding="20dp">
+            app:layout_constraintEnd_toStartOf="@+id/dont_touch_button"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/layout_interests"
+            <TextView
+                android:id="@+id/editTextText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/interests">
+                android:text="@string/preferences"
+                android:textStyle="bold"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/orange_button_background"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:paddingStart="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:text="Sport"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+            <LinearLayout
+                android:id="@+id/pref_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:scaleY="0.8"
+                android:scaleX="0.8"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/orange_button_background"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:paddingStart="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:text="Chess"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/orange_button_background"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:paddingStart="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:text="Art"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    <include
+                        android:id="@+id/pref_container"
+                        layout="@layout/activity_preference_preferences" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/orange_button_background"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:paddingStart="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    android:text="Music"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                </ScrollView>
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/txt_collection"
                 android:textColor="@color/black"
-                android:textAllCaps="true"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="List of wishes"
+                android:text="@string/list_of_wishes"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_interests"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="0dp" />
 
-            <LinearLayout
+            <ScrollView
                 android:layout_marginTop="8dp"
                 android:id="@+id/layout_coll"
                 android:layout_width="wrap_content"
@@ -199,14 +158,15 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rec_collection"
                     android:layout_width="match_parent"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="25dp"
                     android:layout_height="wrap_content"/>
 
-            </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/dont_touch_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

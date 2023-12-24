@@ -35,4 +35,5 @@
     <string name="about">О себе</string>
     <string name="example">Люблю просыпаться в 6 утра и ходить на пары МКН</string>
     <string name="age">Возраст</string>
+    <string name="list_of_wishes">List of wishes</string>
 </resources>
