@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.givegiftdesign.registryfirebase.SaltPassword;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.givegiftdesign.registryfirebase.HelperClass;
@@ -43,7 +44,15 @@ public class RegistryActivity extends AppCompatActivity {
             String username = signupUsername.getText().toString();
             String password = signupPassword.getText().toString();
 
-            HelperClass helperClass = new HelperClass(name, email, username, password);
+            SaltPassword sp;
+            try {
+                sp = new SaltPassword();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            String encrypted_password=sp.encrypt(password);
+
+            HelperClass helperClass = new HelperClass(name, email, username, encrypted_password);
             reference.child(username).setValue(helperClass);
 
             Toast.makeText(RegistryActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
@@ -57,3 +66,4 @@ public class RegistryActivity extends AppCompatActivity {
         });
     }
 }
+
