@@ -1,26 +1,12 @@
 package com.example.givegiftdesign;
 
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class ProfileActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-    }
-}
-
-/*
-package com.example.givegiftdesign;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,13 +27,50 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    //Hooks
     ImageView profile_image;
+    TextView user_name, age, about, email, password, username;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+
+        profile_image = findViewById(R.id.profile_image);
+        user_name = findViewById(R.id.user_name);
+        age = findViewById(R.id.age);
+        about = findViewById(R.id.about_user);
+        email = findViewById(R.id.signup_email);
+        password = findViewById(R.id.signup_password);
+        username = findViewById(R.id.login_username);
+    }
+
+    private void showAllUserData() {
+        Intent intent = getIntent();
+        String user_username = intent.getStringExtra("username");
+        String user_name = intent.getStringExtra("name");
+        String user_email = intent.getStringExtra("email");
+        String user_password = intent.getStringExtra("password");
+
+        /*user_name.setText(user_name);
+        username.setText(user_username);
+        user_name.getEditText().setText(user_name);
+        email.getEditText().setText(user_email);
+        password.getEditText().setText(user_password);*/
+    }
+}
+
+/*
+public class ProfileActivity extends AppCompatActivity {
+
     List<UserCollection>userCollections;
     List<UserPost>userPosts;
     CollectionAdapter collectionAdapter;
     PostAdapter postAdapter;
     RecyclerView collection;
     TextView username,userinfo,userpost,userfollower,userfollowing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

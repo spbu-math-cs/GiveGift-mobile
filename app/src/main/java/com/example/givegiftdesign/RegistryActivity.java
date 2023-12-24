@@ -57,8 +57,8 @@ public class RegistryActivity extends AppCompatActivity {
             }
             String encrypted_password=sp.encrypt(password);
 
-            DatabaseReference userNameRef = reference.child("username");
-            Query queries = userNameRef.orderByChild("username").equalTo(username);
+            //DatabaseReference userNameRef = reference.child("username");
+            Query queries = reference.orderByChild("username").equalTo(username);
             ValueEventListener eventListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -69,6 +69,9 @@ public class RegistryActivity extends AppCompatActivity {
                         Toast.makeText(RegistryActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
                         startActivity(intent);
+                    } else {
+                        signupUsername.setError("Login already exist");
+                        signupUsername.requestFocus();
                     }
                 }
 
