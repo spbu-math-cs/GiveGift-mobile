@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getOrder()) {
             case 1:
                 Log.d("Item profile", "clicked");
-                // startActivity(new Intent(this, ProfileActivity.class));
+                startActivity(new Intent(this, ProfileActivity.class));
                 return true;
             case 2:
                 Log.d("Item friends", "clicked");
