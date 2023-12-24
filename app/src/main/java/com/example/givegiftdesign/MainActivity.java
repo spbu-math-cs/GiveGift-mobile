@@ -26,10 +26,21 @@ import android.widget.ImageButton;
 import com.example.givegiftdesign.giftidea.GiftBlock;
 import com.example.givegiftdesign.giftidea.NewGiftConstructor;
 import com.example.givegiftdesign.preference.PreferenceActivity;
+import com.example.givegiftdesign.request.Idea;
+import com.example.givegiftdesign.request.IdeaClient;
 import com.example.givegiftdesign.request.Request;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,40 +106,40 @@ public class MainActivity extends AppCompatActivity {
                 pendingIntent);
         //
 
-        giftBlocks = new ArrayList<>();
-        giftBlocks.add(new GiftBlock(
-                "https://basket-10.wb.ru/vol1508/part150806/150806145/images/big/1.jpg",
-                "Фонарик",
-                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%A4%D0%BE%D0%BD%D0%B0%D1%80%D0%B8%D0%BA&priceU=000%3B3600000#c150806145"
-        ));
-        giftBlocks.add(new GiftBlock(
-                "https://basket-05.wb.ru/vol835/part83504/83504705/images/big/1.jpg",
-                "Книга",
-                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9A%D0%BD%D0%B8%D0%B3%D0%B0&priceU=000%3B3600000"
-        ));
-        giftBlocks.add(new GiftBlock(
-                "https://basket-02.wb.ru/vol179/part17998/17998675/images/big/1.jpg",
-                "Плакат",
-                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9F%D0%BB%D0%B0%D0%BA%D0%B0%D1%82&priceU=000%3B3600000"
-        ));
-        giftBlocks.add(new GiftBlock(
-                "https://basket-12.wb.ru/vol1837/part183731/183731287/images/big/1.jpg",
-                "Альбом",
-                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%90%D0%BB%D1%8C%D0%B1%D0%BE%D0%BC&priceU=000%3B3600000"
-        ));
-        giftBlocks.add(new GiftBlock(
-                "https://basket-10.wb.ru/vol1404/part140484/140484930/images/big/1.jpg",
-                "Компас",
-                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D1%81&priceU=000%3B3600000"
-        ));
+//        giftBlocks = new ArrayList<>();
+//        giftBlocks.add(new GiftBlock(
+//                "https://basket-10.wb.ru/vol1508/part150806/150806145/images/big/1.jpg",
+//                "Фонарик",
+//                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%A4%D0%BE%D0%BD%D0%B0%D1%80%D0%B8%D0%BA&priceU=000%3B3600000#c150806145"
+//        ));
+//        giftBlocks.add(new GiftBlock(
+//                "https://basket-05.wb.ru/vol835/part83504/83504705/images/big/1.jpg",
+//                "Книга",
+//                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9A%D0%BD%D0%B8%D0%B3%D0%B0&priceU=000%3B3600000"
+//        ));
+//        giftBlocks.add(new GiftBlock(
+//                "https://basket-02.wb.ru/vol179/part17998/17998675/images/big/1.jpg",
+//                "Плакат",
+//                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9F%D0%BB%D0%B0%D0%BA%D0%B0%D1%82&priceU=000%3B3600000"
+//        ));
+//        giftBlocks.add(new GiftBlock(
+//                "https://basket-12.wb.ru/vol1837/part183731/183731287/images/big/1.jpg",
+//                "Альбом",
+//                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%90%D0%BB%D1%8C%D0%B1%D0%BE%D0%BC&priceU=000%3B3600000"
+//        ));
+//        giftBlocks.add(new GiftBlock(
+//                "https://basket-10.wb.ru/vol1404/part140484/140484930/images/big/1.jpg",
+//                "Компас",
+//                "https://www.wildberries.ru/catalog/0/search.aspx?page=1&sort=popular&search=%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D1%81&priceU=000%3B3600000"
+//        ));
 
         // Тут производится запрос
         /**
          * При запуске приложения запрашивается инфа с веба и инициализиует все необходимые поля
          * например 'предпочтения', 'аккаунт' и тп
          */
-        request = new Request();
-        request.req();
+//        request = new Request();
+//        request.req();
         //
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -163,20 +174,71 @@ public class MainActivity extends AppCompatActivity {
 
                 mascot.setImageResource(R.mipmap.gift_foreground);
 
-                ViewGroup parent = (ViewGroup) mascot.getParent();
-                parent.removeView(mascot);
+//                for (GiftBlock gb : giftBlocks) {
+//
+//                    NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
+//                            getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false),
+//                            MainActivity.this
+//                    );
+//
+//                    View giftIdeaView = newGiftConstructor.giftViewParams(gb);
+//                    mainLayout.addView(giftIdeaView);
+//
+//                }
 
-                for (GiftBlock gb : giftBlocks) {
+                OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                        .connectTimeout(1, TimeUnit.MINUTES)
+                        .readTimeout(1, TimeUnit.MINUTES)
+                        .writeTimeout(1, TimeUnit.MINUTES)
+                        .build();
 
-                    NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
-                            getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false),
-                            MainActivity.this
-                    );
+                Retrofit.Builder builder = new Retrofit.Builder()
+                        .baseUrl("https://faq-givegift-req.ru/")
+                        .client(okHttpClient)
+                        .addConverterFactory(GsonConverterFactory.create());
 
-                    View giftIdeaView = newGiftConstructor.giftViewParams(gb);
-                    mainLayout.addView(giftIdeaView);
+                Retrofit retrofit = builder.build();
 
-                }
+                IdeaClient client = retrofit.create(IdeaClient.class);
+                Call<List<Idea>> call = client.ideasForUser();
+
+                call.enqueue(new Callback<List<Idea>>() {
+                    @Override
+                    public void onResponse(Call<List<Idea>> call, Response<List<Idea>> response) {
+                        if (response.isSuccessful()) {
+                            ViewGroup parent = (ViewGroup) mascot.getParent();
+                            parent.removeView(mascot);
+
+                            Log.d("Callback", "response: " + response.body().size());
+                            Log.d("Callback body", "response: " + response.body().get(0));
+
+                            List<Idea> ideas = response.body();
+
+                            for (Idea idea : ideas) {
+
+                                GiftBlock gb = new GiftBlock(idea.getImg_link(),
+                                        idea.getTitle(),
+                                        idea.getMarket_link());
+
+                                NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
+                                        getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false),
+                                        MainActivity.this
+                                );
+
+                                View giftIdeaView = newGiftConstructor.giftViewParams(gb);
+                                mainLayout.addView(giftIdeaView);
+
+                            }
+                        }
+                        else
+                            Log.d("Response code", "response code " + response.code());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Idea>> call, Throwable t) {
+                        Log.w("Failure", "failure: " + t);
+                    }
+                });
             }
         });
         //
