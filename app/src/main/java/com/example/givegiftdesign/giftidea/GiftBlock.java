@@ -1,4 +1,4 @@
-package com.example.givegiftdesign;
+package com.example.givegiftdesign.giftidea;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.example.givegiftdesign;
+package com.example.givegiftdesign.giftidea;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
+import com.example.givegiftdesign.R;
+import com.example.givegiftdesign.giftidea.GiftBlock;
 import com.squareup.picasso.Picasso;
 
 public class GiftBlockConstructor {

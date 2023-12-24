@@ -1,4 +1,4 @@
-package com.example.givegiftdesign;
+package com.example.givegiftdesign.preference;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.givegiftdesign.R;
 import com.example.givegiftdesign.preference.PreferenceBlock;
 import com.example.givegiftdesign.preference.Price;
 import com.example.givegiftdesign.request.Account;

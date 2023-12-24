@@ -1,8 +1,5 @@
 package com.example.givegiftdesign;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -21,18 +18,16 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.view.Menu;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 
+import com.example.givegiftdesign.giftidea.GiftBlock;
+import com.example.givegiftdesign.giftidea.NewGiftConstructor;
+import com.example.givegiftdesign.preference.PreferenceActivity;
 import com.example.givegiftdesign.request.Request;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 

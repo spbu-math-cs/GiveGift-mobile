@@ -1,4 +1,4 @@
-package com.example.givegiftdesign;
+package com.example.givegiftdesign.giftidea;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.givegiftdesign.MainActivity;
+import com.example.givegiftdesign.R;
+import com.example.givegiftdesign.giftidea.GiftBlock;
 import com.squareup.picasso.Picasso;
 
 public class NewGiftConstructor {

@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PreferenceActivity"
+            android:name=".preference.PreferenceActivity"
             android:exported="false" />
         <activity
             android:name=".FriendsActivity"
