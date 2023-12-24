@@ -21,10 +21,12 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.view.Menu;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.example.givegiftdesign.request.Request;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -166,12 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
                 mascot.setImageResource(R.mipmap.gift_foreground);
 
-                try {
-                    Thread.sleep(0);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
                 ViewGroup parent = (ViewGroup) mascot.getParent();
                 parent.removeView(mascot);
 
@@ -196,25 +192,25 @@ public class MainActivity extends AppCompatActivity {
 
         // cWcinszDWy-weZftXcde5r:APA91bFDM0auwB-JRL0d2Nbf7EVYqczI-PlzfXlmTm-31dr_yopZQglKr1tz7jEiTx5stC7a-stsizIsN2rGubJeo9QCVwpi8L3ClZ3si-7nyJPHwKXFqs73dwTLHIfMTqoQyzRgoMeo
         // Получаем токен устрйства для возможности отправки попапов
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-
-                        // Get new FCM registration token
-                        String token = task.getResult();
-
-                        // Log and toast
-                        String msg = getString(R.string.msg_token_fmt, token);
-//                        String msg = token;
-                        Log.d(TAG, msg);
-//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(new OnCompleteListener<String>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<String> task) {
+//                        if (!task.isSuccessful()) {
+//                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+//                            return;
+//                        }
+//
+//                        // Get new FCM registration token
+//                        String token = task.getResult();
+//
+//                        // Log and toast
+//                        String msg = getString(R.string.msg_token_fmt, token);
+////                        String msg = token;
+//                        Log.d(TAG, msg);
+////                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
     }
 
     /**

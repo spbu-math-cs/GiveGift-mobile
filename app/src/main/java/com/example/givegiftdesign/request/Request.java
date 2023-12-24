@@ -18,11 +18,6 @@ public class Request {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://ip.jsontest.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-
         PreferenceApi prefApi = retrofit.create(PreferenceApi.class);
 //        TestApi testApi = retrofit.create(TestApi.class);
 
