@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GiveGiftDesign"
         tools:targetApi="31">
+        <activity android:name=".SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".PreferenceActivity"
             android:exported="false" />
@@ -34,16 +43,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="fullSensor">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-
-<!--                <data android:scheme="http" />-->
-<!--                <data android:scheme="https" />-->
-            </intent-filter>
+            >
         </activity>
 
         <receiver android:name=".Reminder"/>
