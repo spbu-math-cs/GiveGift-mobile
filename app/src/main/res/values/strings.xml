@@ -39,4 +39,5 @@
     <string name="save">Save</string>
     <string name="about">About</string>
     <string name="example">Example</string>
+    <string name="age">Age</string>
 </resources>
