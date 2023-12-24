@@ -50,6 +50,7 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -58,4 +59,6 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.7.1")
     implementation("com.squareup.retrofit2:retrofit:2.5.0")
     implementation("com.squareup.retrofit2:converter-gson:2.2.0")
+
+    implementation("androidx.cardview:cardview:1.0.0")
 }

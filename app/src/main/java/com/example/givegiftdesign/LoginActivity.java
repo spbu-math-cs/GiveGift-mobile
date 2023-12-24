@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.givegiftdesign.registryfirebase.SaltPassword;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegistryActivity.class);
             startActivity(intent);
         });
-
     }
 
     public Boolean validateUsername() {
@@ -88,8 +88,16 @@ public class LoginActivity extends AppCompatActivity {
                     loginUsername.setError(null);
                     String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
 
-                    assert passwordFromDB != null;
-                    if (passwordFromDB.equals(userPassword)) {
+                    SaltPassword sp;
+                    try {
+                        sp = new SaltPassword();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                    String decrypted_password=sp.decrypt(passwordFromDB);
+
+                    assert decrypted_password != null;
+                    if (decrypted_password.equals(userPassword)) {
                         loginUsername.setError(null);
 
                         String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
@@ -101,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("name", nameFromDB);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("password", passwordFromDB);
+                        intent.putExtra("password", decrypted_password);
 
                         startActivity(intent);
                     } else {
