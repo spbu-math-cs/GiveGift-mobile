@@ -26,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
-    ImageView profileimage;
+    ImageView profile_image;
     List<UserCollection>userCollections;
     List<UserPost>userPosts;
     CollectionAdapter collectionAdapter;
@@ -38,14 +38,14 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        profileimage= findViewById(R.id.profile_image);
+        profile_image = findViewById(R.id.profile_image);
         username= findViewById(R.id.username);
         userpost= findViewById(R.id.posts);
         userinfo= findViewById(R.id.about);
         userfollower= findViewById(R.id.follower);
         userfollowing= findViewById(R.id.following);
 
-        getuserdata();
+        getUserData();
 
         collection= findViewById(R.id.rec_collection);
         collection.setHasFixedSize(true);
@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         getpostdata();
     }
 
-    private void getuserdata() {
+    private void getUserData() {
         Call<UserData>call= MyretrofitClient.getInstance().getMyApi().geuserdata();
         call.enqueue(new Callback<UserData>() {
             @Override
@@ -77,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext())
                         .load(profileimg)
                         .apply(RequestOptions.circleCropTransform())
-                        .into(profileimage);
+                        .into(profile_image);
             }
 
             @Override
