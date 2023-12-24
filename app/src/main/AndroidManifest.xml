@@ -36,15 +36,16 @@
             android:exported="false" />
         <activity
                 android:name=".LoginActivity"
-                android:exported="false" />
+                android:exported="true" />
         <activity
                 android:name=".RegistryActivity"
                 android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            >
-        </activity>
+            android:exported="false" />
+        <activity
+            android:name=".UpdateActivity"
+            android:exported="false" />
 
         <receiver android:name=".Reminder"/>
     </application>

@@ -1,5 +1,6 @@
 package com.example.givegiftdesign;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -10,9 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.givegiftdesign.registryfirebase.SaltPassword;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.givegiftdesign.registryfirebase.HelperClass;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegistryActivity extends AppCompatActivity {
 
@@ -52,12 +57,25 @@ public class RegistryActivity extends AppCompatActivity {
             }
             String encrypted_password=sp.encrypt(password);
 
-            HelperClass helperClass = new HelperClass(name, email, username, encrypted_password);
-            reference.child(username).setValue(helperClass);
+            DatabaseReference userNameRef = reference.child("username");
+            Query queries = userNameRef.orderByChild("username").equalTo(username);
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(!dataSnapshot.exists()) {
+                        HelperClass helperClass = new HelperClass(name, email, username, encrypted_password);
+                        reference.child(username).setValue(helperClass);
 
-            Toast.makeText(RegistryActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
-            startActivity(intent);
+                        Toast.makeText(RegistryActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegistryActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            };
+            queries.addListenerForSingleValueEvent(eventListener);
         });
 
         loginRedirectText.setOnClickListener(view -> {
