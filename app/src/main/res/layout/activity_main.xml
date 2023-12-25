@@ -39,10 +39,6 @@
             android:paddingBottom="10dp"
             android:gravity="center"
             >
-            <!-- android:layout_gravity="center">-->
-            <!--            android:divider="@drawable/empty_tall_divider"-->
-            <!--            android:dividerPadding="20dp"-->
-
 
             <ImageButton
                 android:id="@+id/maskot"
@@ -51,7 +47,7 @@
                 android:scaleX="2.5"
                 android:scaleY="2.5"
                 android:src="@mipmap/greetings_foreground"
-                android:contentDescription="Cipa"
+                android:contentDescription="@string/mascot"
                 android:background="@null"
                 >
 
@@ -73,7 +69,3 @@
     </RelativeLayout>
 
 </LinearLayout>
-
-    <!--    app:layout_constraintTop_toBottomOf="@+id/main_toolbar"-->
-
-    <!--<include layout="@layout/activity_main_gift" />-->

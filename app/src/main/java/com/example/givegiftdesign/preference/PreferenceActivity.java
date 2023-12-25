@@ -10,13 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.givegiftdesign.R;
-import com.example.givegiftdesign.preference.PreferenceBlock;
-import com.example.givegiftdesign.preference.Price;
-import com.example.givegiftdesign.request.Account;
+import com.example.givegiftdesign.data.Account;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.slider.RangeSlider;
@@ -52,11 +49,8 @@ public class PreferenceActivity extends AppCompatActivity {
 
         preferencesContainerLayout = findViewById(R.id.flexbox);
 
-        // Отрисовывем полученные с веба интересы
+        // Отрисовывем полученные интересы
         if (Account.getInterests().size() != 0) {
-            /**
-             * Предпочтения, полученные из веба для аккаунта
-             */
             List<String> prefs = Account.getInterests();
             containedPref.addAll(prefs);
             for(String str: prefs) {
@@ -80,6 +74,8 @@ public class PreferenceActivity extends AppCompatActivity {
         EditText minPrice = findViewById(R.id.minPrice);
         EditText maxPrice = findViewById(R.id.maxPrice);
         Price priceHandler;
+        // Устанваливаем ценовой диапазон, если он имеется
+        // иначе значение по умолчанию
         if (Account.getPrice_range().size() != 0) {
             priceHandler = new Price(
                     Account.getPrice_range().get(0),
@@ -150,9 +146,6 @@ public class PreferenceActivity extends AppCompatActivity {
                     // Добавляем сделанный CardView в основной layout
                     View prefView = drawPref().prefViewParam(selectedItem);
                     preferencesContainerLayout.addView(prefView);
-
-                    // После каждого добавления предпочтения обновляется список предпочтений аккаунта
-//                    Account.updateInterests(containedPref);
 
                     return true;
                 }

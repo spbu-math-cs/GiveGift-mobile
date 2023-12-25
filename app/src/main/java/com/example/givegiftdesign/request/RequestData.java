@@ -1,15 +1,13 @@
 package com.example.givegiftdesign.request;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class DataModal {
+public class RequestData {
     List<String> tags = new ArrayList<>();
     List<Integer> price_range = new ArrayList<>();
 
-    public DataModal(List<String> tags, List<Integer> price_range) {
+    public RequestData(List<String> tags, List<Integer> price_range) {
         this.tags = tags;
         this.price_range = price_range;
     }

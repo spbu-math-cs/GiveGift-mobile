@@ -25,10 +25,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.givegiftdesign.giftidea.GiftBlock;
-import com.example.givegiftdesign.request.DataModal;
+import com.example.givegiftdesign.request.RequestData;
 import com.example.givegiftdesign.preference.PreferenceActivity;
-import com.example.givegiftdesign.request.Account;
-import com.example.givegiftdesign.request.DataModalApi;
+import com.example.givegiftdesign.data.Account;
+import com.example.givegiftdesign.request.RequestDataApi;
 import com.example.givegiftdesign.request.Request;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -53,14 +53,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private Request request;
 
+    /**
+     * Блок для отображения полученной идеи для подарка
+     */
     private ArrayList<GiftBlock> giftBlocks;
 
     /**
      * В этот слой добавляются сгенерированные идеи для подарка
      */
     LinearLayoutCompat mainLayout;
-
-    // Люблю попугов
+    ImageButton mascot;
 
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -125,24 +127,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mainLayout = findViewById(R.id.gift_layout);
-
-        // Ципа dancing
-        ImageButton mascot = findViewById(R.id.maskot);
-        final boolean[] isChanged = {false};
-        mascot.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN && isChanged[0]){
-                    mascot.setImageResource(R.mipmap.greetings_foreground);
-                    isChanged[0] = false;
-                }
-                else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    mascot.setImageResource(R.mipmap.gift_foreground);
-                    isChanged[0] = true;
-                }
-                return false;
-            }
-        });
+        mascot = findViewById(R.id.maskot);
+        dancingMascot();
 
         // Кнопка для генерации идей на основе предпочтений
         Button giftIdeaBtn = findViewById(R.id.gift_idea);
@@ -152,65 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
                 mascot.setImageResource(R.mipmap.gift_foreground);
 
-//                for (GiftBlock gb : giftBlocks) {
-//
-//                    NewGiftConstructor newGiftConstructor = new NewGiftConstructor(
-//                            getLayoutInflater().inflate(R.layout.activity_main_gift, mainLayout, false),
-//                            MainActivity.this
-//                    );
-//
-//                    View giftIdeaView = newGiftConstructor.giftViewParams(gb);
-//                    mainLayout.addView(giftIdeaView);
-//
-//                }
-
-                OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                        .connectTimeout(1, TimeUnit.MINUTES)
-                        .readTimeout(1, TimeUnit.MINUTES)
-                        .writeTimeout(1, TimeUnit.MINUTES)
-                        .build();
-
-                DataModal modal = new DataModal(Account.getInterests(), Account.getPrice_range());
-
-                // Начиная отсюда
-                Gson gson = new GsonBuilder()
-                        .setLenient()
-                        .create();
-
-                Retrofit.Builder builder = new Retrofit.Builder()
-                        .baseUrl("https://faq-givegift-req.ru/")
-                        .client(okHttpClient)
-//                        .addConverterFactory(ScalarsConverterFactory.create())
-                        .addConverterFactory(GsonConverterFactory.create(gson));
-
-                Retrofit retrofit = builder.build();
-
-//                DataModal modal = new DataModal(
-//                        Collections.singletonMap("tags", Account.getInterests()),
-//                        Collections.singletonMap("price_range", Account.getPrice_range()));
-
-                DataModalApi modalApi = retrofit.create(DataModalApi.class);
-                Call<DataModal> dataModalCall = modalApi.createPost(modal);
-
-                Log.d("Call", "body: " + new GsonBuilder().setPrettyPrinting().create().toJson(modal));
-
-                dataModalCall.enqueue(new Callback<DataModal>() {
-                    @Override
-                    public void onResponse(Call<DataModal> call, Response<DataModal> response) {
-                        Toast.makeText(MainActivity.this, "Data added to API: ",
-                                Toast.LENGTH_SHORT).show();
-
-//                        DataModal responseFromApi = response.body();
-                        String responseString = "Response code: " + response.code();
-                        Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<DataModal> call, Throwable t) {
-                        Log.w("Failure", "failure: " + t);
-                    }
-                });
-                // До сюда
+                RequestData requestData = new RequestData(Account.getInterests(), Account.getPrice_range());
+                sendNetworkRequest(requestData);
 
 //                IdeaClient client = retrofit.create(IdeaClient.class);
 //                Call<List<Idea>> call = client.ideasForUser();
@@ -256,22 +185,95 @@ public class MainActivity extends AppCompatActivity {
         });
         //
 
+        // Кнопка очистки экрана
         FloatingActionButton fab_clean = findViewById(R.id.clear);
-        fab_clean.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ViewGroup giftLayout = findViewById(R.id.gift_layout);
-//                while(giftLayout.getChildCount() != 0) {
-//                    int i = giftLayout.getChildCount();
-//                    ViewGroup child = (ViewGroup) giftLayout.getChildAt(i);
-                giftLayout.removeAllViews();
-//                }
-            }
+        fab_clean.setOnClickListener(v -> {
+            @SuppressLint("CutPasteId") ViewGroup giftLayout = findViewById(R.id.gift_layout);
+            giftLayout.removeAllViews();
         });
 
         // Кнопка для перехода в activity, где происходит выбор предпочтений и цены
         FloatingActionButton fab_pref = findViewById(R.id.fab);
         fab_pref.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PreferenceActivity.class)));
+    }
+
+    /**
+     * Отправляет POST запрос с предпочтениями и ценовым диапазоном
+     * на <a href="https://faq-givegift-req.ru/">...</a>, откуда потом приходят идеи для подарков
+     * @param requestData - объект с предпочтениями и ценовым диапазоном
+     */
+    private void sendNetworkRequest(RequestData requestData) {
+
+        // Результат запроса от gpt можно ожидать несколько секунд, так что время
+        // ожидания увеличено
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.MINUTES)
+                .writeTimeout(1, TimeUnit.MINUTES)
+                .build();
+
+        // Json builder
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        //
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("https://faq-givegift-req.ru/")
+                .client(okHttpClient)
+//                        .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson));
+
+        Retrofit retrofit = builder.build();
+
+//                RequestData modal = new RequestData(
+//                        Collections.singletonMap("tags", Account.getInterests()),
+//                        Collections.singletonMap("price_range", Account.getPrice_range()));
+
+        RequestDataApi modalApi = retrofit.create(RequestDataApi.class);
+        Call<RequestData> dataModalCall = modalApi.createPost(requestData);
+
+        Log.d("Call", "body: " + new GsonBuilder().setPrettyPrinting().create().toJson(requestData));
+
+        dataModalCall.enqueue(new Callback<RequestData>() {
+            @Override
+            public void onResponse(Call<RequestData> call, Response<RequestData> response) {
+                Toast.makeText(MainActivity.this, "Data added to API: ",
+                        Toast.LENGTH_SHORT).show();
+
+//                        RequestData responseFromApi = response.body();
+                String responseString = "Response code: " + response.code();
+                Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<RequestData> call, Throwable t) {
+                Log.w("Failure", "failure: " + t);
+            }
+        });
+    }
+
+    /**
+     * Отображение маскота, по которому можно кликать
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private void dancingMascot() {
+        // Ципа dancing
+        final boolean[] isChanged = {false};
+        mascot.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN && isChanged[0]){
+                    mascot.setImageResource(R.mipmap.greetings_foreground);
+                    isChanged[0] = false;
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    mascot.setImageResource(R.mipmap.gift_foreground);
+                    isChanged[0] = true;
+                }
+                return false;
+            }
+        });
     }
 
     /**

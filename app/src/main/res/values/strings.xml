@@ -41,4 +41,5 @@
     <string name="example">Example</string>
     <string name="age">Age</string>
     <string name="list_of_wishes">List of wishes</string>
+    <string name="mascot" translatable="false">Chicken</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.givegiftdesign.request;
+package com.example.givegiftdesign.data;
 
 import java.util.ArrayList;
 import java.util.Date;

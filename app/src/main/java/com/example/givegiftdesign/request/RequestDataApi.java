@@ -4,7 +4,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-public interface DataModalApi {
+public interface RequestDataApi {
     @POST("/generate_ideas")
-    Call<DataModal> createPost(@Body DataModal dataModal);
+    Call<RequestData> createPost(@Body RequestData requestData);
 }
