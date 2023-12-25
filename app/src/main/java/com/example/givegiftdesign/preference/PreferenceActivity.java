@@ -36,7 +36,7 @@ public class PreferenceActivity extends AppCompatActivity {
      * Содержит в себе весь список указанных предпочтений
      * Нужен для проверки выбора уже имеющихся предпочтений
      */
-    private ArrayList<String> containedPref = new ArrayList<>();
+    private List<String> containedPref = new ArrayList<>();
 
     /**
      * Предпочтения, полученные из веба для аккаунта
@@ -58,12 +58,14 @@ public class PreferenceActivity extends AppCompatActivity {
         preferencesContainerLayout = findViewById(R.id.flexbox);
 
         // Отрисовывем полученные с веба интересы
-        prefs = Account.getInterests();
-        containedPref.addAll(prefs);
-        for(String str: prefs) {
-            // Добавляем сделанный CardView в основной layout
-            View prefView = drawPref().prefViewParam(str);
-            preferencesContainerLayout.addView(prefView);
+        if (Account.getInterests() != null) {
+            prefs = Account.getInterests();
+            containedPref.addAll(prefs);
+            for(String str: prefs) {
+                // Добавляем сделанный CardView в основной layout
+                View prefView = drawPref().prefViewParam(str);
+                preferencesContainerLayout.addView(prefView);
+            }
         }
 
         // Открывает список со списком возможных предпочтений

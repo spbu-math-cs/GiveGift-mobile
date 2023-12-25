@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import com.example.givegiftdesign.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Методы конструирования CardView с предпочтением
@@ -38,7 +39,7 @@ public class PreferenceBlock {
                            TextView pref,
                            Button closeBtn,
                            Resources resources,
-                           ArrayList<String> prefs) {
+                           List<String> prefs) {
         this.cardViewBlock = cardViewBlock;
         this.innerBlock = innerBlock;
         this.pref = pref;
@@ -78,7 +79,7 @@ public class PreferenceBlock {
      * Кнопка удаляет свой блок и удаляет соответствующее предпочтение
      * @param prefs - массив предпочтений, элемент которого будет удалён
      */
-    private void setDeleteBtn(ArrayList<String> prefs) {
+    private void setDeleteBtn(List<String> prefs) {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

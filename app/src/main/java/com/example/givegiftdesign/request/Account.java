@@ -10,14 +10,16 @@ public class Account {
     private String email;
     private String about;
     private String birth_date;
-    private static List<String> interests;
+    private static List<String> interests = new ArrayList<>();
+    private static List<Integer> price_range = new ArrayList<>();
 
     public static void tempInterests() {
-        interests = new ArrayList<>();
-
         interests.add("Кино");
         interests.add("Романтика");
         interests.add("Книги");
+
+        price_range.add(100);
+        price_range.add(10000);
     }
 
     public static void updateInterests(List<String> inter) {
@@ -26,5 +28,9 @@ public class Account {
 
     public static List<String> getInterests() {
         return interests;
+    }
+
+    public static List<Integer> getPrice_range() {
+        return price_range;
     }
 }

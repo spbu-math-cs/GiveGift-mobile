@@ -57,8 +57,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.github.bumptech.glide:glide:4.7.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.7.1")
-    implementation("com.squareup.retrofit2:retrofit:2.5.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.2.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.3.0")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.1")
 
     implementation("androidx.cardview:cardview:1.0.0")
 }
