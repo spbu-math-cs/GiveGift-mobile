@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
                 DataModal modal = new DataModal(Account.getInterests(), Account.getPrice_range());
 
+                // Начиная отсюда
                 Gson gson = new GsonBuilder()
                         .setLenient()
                         .create();
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.w("Failure", "failure: " + t);
                     }
                 });
+                // До сюда
 
 //                IdeaClient client = retrofit.create(IdeaClient.class);
 //                Call<List<Idea>> call = client.ideasForUser();
