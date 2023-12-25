@@ -26,6 +26,11 @@ public class Account {
         interests = inter;
     }
 
+    public static void setPrice_range(float v1, float v2) {
+        price_range.set(0, (int)v1);
+        price_range.set(1, (int)v2);
+    }
+
     public static List<String> getInterests() {
         return interests;
     }

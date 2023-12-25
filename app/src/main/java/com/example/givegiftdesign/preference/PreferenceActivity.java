@@ -39,11 +39,6 @@ public class PreferenceActivity extends AppCompatActivity {
     private List<String> containedPref = new ArrayList<>();
 
     /**
-     * Предпочтения, полученные из веба для аккаунта
-     */
-    private List<String> prefs;
-
-    /**
      * Запускается при создании activity
      * @param savedInstanceState If the activity is being re-initialized after
      *     previously being shut down then this Bundle contains the data it most
@@ -58,8 +53,11 @@ public class PreferenceActivity extends AppCompatActivity {
         preferencesContainerLayout = findViewById(R.id.flexbox);
 
         // Отрисовывем полученные с веба интересы
-        if (Account.getInterests() != null) {
-            prefs = Account.getInterests();
+        if (Account.getInterests().size() != 0) {
+            /**
+             * Предпочтения, полученные из веба для аккаунта
+             */
+            List<String> prefs = Account.getInterests();
             containedPref.addAll(prefs);
             for(String str: prefs) {
                 // Добавляем сделанный CardView в основной layout
@@ -81,7 +79,22 @@ public class PreferenceActivity extends AppCompatActivity {
         RangeSlider seekBarPrice = findViewById(R.id.seekBarPrice);
         EditText minPrice = findViewById(R.id.minPrice);
         EditText maxPrice = findViewById(R.id.maxPrice);
-        Price priceHandler = new Price();
+        Price priceHandler;
+        if (Account.getPrice_range().size() != 0) {
+            priceHandler = new Price(
+                    Account.getPrice_range().get(0),
+                    Account.getPrice_range().get(1)
+            );
+            float v1 = Account.getPrice_range().get(0);
+            float v2 = Account.getPrice_range().get(1);
+            minPrice.setText(String.valueOf(v1));
+            maxPrice.setText(String.valueOf(v2));
+            seekBarPrice.setValues(v1, v2);
+        } else {
+            priceHandler = new Price(0, 5000);
+            minPrice.setText(String.valueOf(0));
+            maxPrice.setText(String.valueOf(5000));
+        }
         priceHandler.handle(seekBarPrice, minPrice, maxPrice);
 
         // Нижняя левая кнопка отменяет изменения
@@ -90,7 +103,16 @@ public class PreferenceActivity extends AppCompatActivity {
 
         // Нижняя правая кнопка с галочкой принимает изменения
         FloatingActionButton fab_accept = findViewById(R.id.fab_accept);
-        fab_accept.setOnClickListener(view -> finish());
+        fab_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Account.updateInterests(containedPref);
+                List<Float> vals = seekBarPrice.getValues();
+                Account.setPrice_range(vals.get(0), vals.get(1));
+
+                finish();
+            }
+        });
     }
 
     /**
@@ -130,7 +152,7 @@ public class PreferenceActivity extends AppCompatActivity {
                     preferencesContainerLayout.addView(prefView);
 
                     // После каждого добавления предпочтения обновляется список предпочтений аккаунта
-                    Account.updateInterests(containedPref);
+//                    Account.updateInterests(containedPref);
 
                     return true;
                 }

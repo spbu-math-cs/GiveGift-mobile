@@ -8,95 +8,99 @@
     android:orientation="vertical"
     tools:context=".preference.PreferenceActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@color/white"
-            android:layout_gravity="center_horizontal"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true"
-            app:cardCornerRadius="15dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/pref_layout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/layout_pref_height"
-                android:layout_margin="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/editTextText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/preferences"
-                    android:textColor="@color/black"
-                    android:textSize="23sp" />
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <include
-                        android:id="@+id/pref_container"
-                        layout="@layout/activity_preference_preferences" />
-
-                </ScrollView>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:background="@color/white"
-            app:cardCornerRadius="@dimen/cardview_cornerradius"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true">
-
-            <LinearLayout
-                android:id="@+id/price_layout"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="15dp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/pref_layout">
+                android:background="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/editTextText2"
+                <LinearLayout
+                    android:id="@+id/pref_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/price"
-                    android:textColor="@color/black"
-                    android:textSize="23sp" />
+                    android:layout_height="@dimen/layout_pref_height"
+                    android:layout_margin="15dp"
+                    android:orientation="vertical">
 
-                <include
-                    android:id="@+id/price"
-                    layout="@layout/activity_preference_price" />
+                    <TextView
+                        android:id="@+id/editTextText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/preferences"
+                        android:textColor="@color/black"
+                        android:textSize="23sp" />
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <include
+                            android:id="@+id/pref_container"
+                            layout="@layout/activity_preference_preferences" />
+
+                    </ScrollView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:background="@color/white"
+                app:cardCornerRadius="@dimen/cardview_cornerradius"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:id="@+id/price_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/pref_layout">
+
+                    <TextView
+                        android:id="@+id/editTextText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/price"
+                        android:textColor="@color/black"
+                        android:textSize="23sp" />
+
+                    <include
+                        android:id="@+id/price"
+                        layout="@layout/activity_preference_price" />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
+        </LinearLayout>
 
-
+    </ScrollView>
 
     <include
         android:id="@+id/main_footer"
+        layout="@layout/activity_preference_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_margin="20dp"
-        layout="@layout/activity_preference_footer" />
+        android:layout_margin="20dp" />
 
 </FrameLayout>
