@@ -10,11 +10,27 @@
     app:layout_constraintStart_toStartOf="parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:contentDescription="@string/gift_search"
+        android:longClickable="false"
+        android:src="@drawable/baseline_cleaning_services_24"
+        app:backgroundTint="@color/orange"
+        app:elevation="0dp"
+        app:fabCustomSize="48dp"
+        app:maxImageSize="28dp"
+        app:rippleColor="@color/white"
+        tools:ignore="ImageContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:clickable="true"
         android:contentDescription="@string/gift_search"
@@ -30,11 +46,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_toStartOf="@+id/fab"
+        android:layout_toEndOf="@+id/clear"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         app:cardCornerRadius="@dimen/cardview_cornerradius">
 
         <Button
@@ -43,8 +58,6 @@
             android:layout_height="wrap_content"
             android:background="@color/orange"
             android:clickable="true"
-            android:onClick="onGiftIdeaCreate"
-            android:padding="10dp"
             android:text="@string/gift_search"
             android:textAlignment="center"
             android:textColor="@color/white"

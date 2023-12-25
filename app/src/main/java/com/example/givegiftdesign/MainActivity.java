@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.view.Menu;
@@ -255,9 +256,22 @@ public class MainActivity extends AppCompatActivity {
         });
         //
 
+        FloatingActionButton fab_clean = findViewById(R.id.clear);
+        fab_clean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup giftLayout = findViewById(R.id.gift_layout);
+//                while(giftLayout.getChildCount() != 0) {
+//                    int i = giftLayout.getChildCount();
+//                    ViewGroup child = (ViewGroup) giftLayout.getChildAt(i);
+                giftLayout.removeAllViews();
+//                }
+            }
+        });
+
         // Кнопка для перехода в activity, где происходит выбор предпочтений и цены
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PreferenceActivity.class)));
+        FloatingActionButton fab_pref = findViewById(R.id.fab);
+        fab_pref.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, PreferenceActivity.class)));
     }
 
     /**
