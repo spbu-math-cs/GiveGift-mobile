@@ -2,35 +2,31 @@ package com.example.givegiftdesign;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.givegiftdesign.profilescreen.adapter.CollectionAdapter;
-import com.example.givegiftdesign.profilescreen.adapter.PostAdapter;
-import com.example.givegiftdesign.profilescreen.api.MyretrofitClient;
-import com.example.givegiftdesign.profilescreen.model.UserCollection;
-import com.example.givegiftdesign.profilescreen.model.UserData;
-import com.example.givegiftdesign.profilescreen.model.UserPost;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
     //Hooks
     ImageView profile_image;
     TextView user_name, age, about, email, password, username;
+    Button update_button;
+    FirebaseDatabase firebaseDatabase;
+    // creating a variable for our
+    // Database Reference for Firebase.
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +40,51 @@ public class ProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.signup_email);
         password = findViewById(R.id.signup_password);
         username = findViewById(R.id.login_username);
+        update_button = findViewById(R.id.update_profile);
+
+        update_button.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, UpdateActivity.class);
+            startActivity(intent);
+        });
+
+        firebaseDatabase = FirebaseDatabase.getInstance("https://givegift-241db-default-rtdb.europe-west1.firebasedatabase.app/");
+        databaseReference = firebaseDatabase.getReference("users");
+
+        /*Intent intent = getIntent();
+        String userUsername = intent.getStringExtra("username");
+        getData(userUsername);
+
+        if (userUsername == null) {
+            Toast.makeText(ProfileActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
-    private void showAllUserData() {
-        Intent intent = getIntent();
-        String user_username = intent.getStringExtra("username");
-        String user_name = intent.getStringExtra("name");
-        String user_email = intent.getStringExtra("email");
-        String user_password = intent.getStringExtra("password");
+    private void getData(String userUsername) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String nameFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
+                String usernameFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
 
-        /*user_name.setText(user_name);
-        username.setText(user_username);
-        user_name.getEditText().setText(user_name);
-        email.getEditText().setText(user_email);
-        password.getEditText().setText(user_password);*/
+                user_name.setText(nameFromDB);
+                username.setText(usernameFromDB);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProfileActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
+                    /* intent = getIntent();
+                    String user_username = intent.getStringExtra("username");
+                    String user_name_db = intent.getStringExtra("user_name");
+                    String user_email = intent.getStringExtra("email");
+                    String user_password = intent.getStringExtra("password");
+
+                    user_name.setText(nameFromDB);
+                    username.setText(usernameFromDB);*/
 
 /*
 public class ProfileActivity extends AppCompatActivity {

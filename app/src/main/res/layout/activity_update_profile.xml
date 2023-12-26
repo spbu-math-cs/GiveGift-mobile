@@ -103,7 +103,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>-->
 
-        <com.google.android.material.textfield.TextInputLayout
+        <!--<com.google.android.material.textfield.TextInputLayout
             android:hint="@string/user_email"
             android:id="@+id/new_email"
             android:layout_height="wrap_content"
@@ -115,16 +115,16 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.textfield.TextInputLayout
-            android:hint="@string/user_password"
-            android:id="@+id/new_password"
+            android:hint="@string/about"
+            android:id="@+id/about"
             android:layout_height="wrap_content"
             android:layout_width="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:drawableStart="@android:drawable/ic_secure"
+                android:drawableStart="@android:drawable/ic_menu_info_details"
                 android:drawablePadding="10dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent" />
