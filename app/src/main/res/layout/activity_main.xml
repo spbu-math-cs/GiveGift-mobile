@@ -12,46 +12,34 @@
     <include
         android:id="@+id/main_toolbar"
         layout="@layout/activity_main_toolbar"
-        android:layout_weight="0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="0" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
-        android:paddingVertical="15dp"
         android:clipToPadding="false"
-        android:orientation="vertical"
         android:contentDescription="@string/gift_desc"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:paddingVertical="15dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/gift_layout"
-            android:showDividers=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:transcriptMode="alwaysScroll"
-            android:stackFromBottom="true"
             android:clipToPadding="false"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="10dp"
-            android:gravity="center"
-            >
+            android:showDividers=""
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll">
 
-            <ImageButton
-                android:id="@+id/maskot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="2.5"
-                android:scaleY="2.5"
-                android:src="@mipmap/greetings_foreground"
-                android:contentDescription="@string/mascot"
-                android:background="@null"
-                >
-
-            </ImageButton>
+            
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

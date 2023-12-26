@@ -16,7 +16,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.givegiftdesign.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

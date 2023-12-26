@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestData {
-    List<String> tags = new ArrayList<>();
-    List<Integer> price_range = new ArrayList<>();
+    private List<String> tags = new ArrayList<>();
+    private List<Integer> price_range = new ArrayList<>();
+    private String img_link;
+    private String market_link;
+    private String title;
+
 
     public RequestData(List<String> tags, List<Integer> price_range) {
         this.tags = tags;
@@ -26,5 +30,19 @@ public class RequestData {
 
     public void setPrice_range(List<Integer> price_range) {
         this.price_range = price_range;
+    }
+
+
+
+    public String getImg_link() {
+        return img_link;
+    }
+
+    public String getMarket_link() {
+        return market_link;
+    }
+
+    public String getTitle() {
+        return title;
     }
 }
